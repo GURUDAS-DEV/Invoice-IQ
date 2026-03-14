@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@variant dark (&:is(.dark *));
+@variant dark (&:is(.dark *), .dark &);
 
 @theme inline {
   /* PRD DESIGN SYSTEM TOKENS */
@@ -35,6 +35,8 @@
   --shadow-glow: 0 4px 14px rgba(59, 130, 246, 0.08);
 
   --font-sans: var(--font-geist-sans);
+  --font-outfit: var(--font-outfit);  
+  --font-space-grotesk: var(--font-space-grotesk);
 }
 
 @layer base {
