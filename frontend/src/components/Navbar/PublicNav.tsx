@@ -15,7 +15,6 @@ const Navbar = () => {
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Services", href: "/services" },
-    { name: "Pricing", href: "/pricing" },
     { name: "FAQs", href: "/FrequentlyAskedQuestions" },
     { name: "Documentation", href: "/documentation" },
   ]
@@ -36,13 +35,22 @@ const Navbar = () => {
           {/* Logo - Left */}
           <div className="shrink-0 relative p-4">
             <Link href="/" className="flex w-full h-full items-center">
-              <Image 
-                src="/Logo.png" 
-                alt="Logo.png" 
-                // fill={true}
-                height={150}
-                width={150}
-              />
+              <div className="transition-all duration-200">
+                <Image
+                  src="/Logo.png"
+                  alt="InvoiceIQ Logo"
+                  height={120}
+                  width={120}
+                  className="dark:hidden shrink-0"
+                />
+                <Image
+                  src="/DarkLogo.png"
+                  alt="InvoiceIQ Logo"
+                  height={120}
+                  width={120}
+                  className="hidden dark:block shrink-0"
+                />
+              </div>
             </Link>
           </div>
 
@@ -84,7 +92,7 @@ const Navbar = () => {
               </Button>
             ) : (
               <>
-                
+
                 <Button
                   size="sm"
                   className="hidden md:flex items-center gap-2 font-medium rounded-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100"
@@ -107,12 +115,14 @@ const Navbar = () => {
           {/* Logo */}
           <div className="shrink-0 relative w-20 h-14">
             <Link href="/" className="flex items-center" onClick={closeMobileMenu}>
-              <Image 
-                src="/Logo.png" 
-                alt="Logo.png" 
-                fill={true}
-                className="object-contain"
-              />
+              <div className="w-full h-full dark:bg-white dark:rounded-lg dark:px-1 transition-all duration-200 relative">
+                <Image
+                  src="/Logo.png"
+                  alt="InvoiceIQ Logo"
+                  fill={true}
+                  className="object-contain"
+                />
+              </div>
             </Link>
           </div>
 
@@ -150,9 +160,8 @@ const Navbar = () => {
 
       {/* Mobile Sliding Menu */}
       <div
-        className={`fixed top-0 right-0 h-full w-[75%] max-w-[300px] bg-white dark:bg-gray-950 shadow-2xl z-40 transform transition-transform duration-300 ease-in-out md:hidden ${
-          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed top-0 right-0 h-full w-[75%] max-w-[300px] bg-white dark:bg-gray-950 shadow-2xl z-40 transform transition-transform duration-300 ease-in-out md:hidden ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
       >
         <div className="flex flex-col h-full p-6 pt-24 font-outfit">
           {/* Navigation Links */}
