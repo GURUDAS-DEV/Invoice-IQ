@@ -64,7 +64,7 @@ const PrivateSideBar = () => {
     const sidebarBody = (
         <>
             {/* ── Brand ─────────────────────────────────── */}
-            <div className="flex px-5 mb-6 select-none">
+            <div className="flex px-5 mb-8 select-none">
                 <Link
                     href="/home"
                     onClick={() => setIsMobileOpen(false)}
@@ -87,16 +87,17 @@ const PrivateSideBar = () => {
                 </Link>
             </div>
 
+
             {/* ── Quick Action Button ────────────────────── */}
             <div className="px-4 mb-6">
-                <button className="
-                    w-full flex items-center justify-center gap-2 py-2.5 rounded-xl
-                    bg-[#1E3A8A] hover:bg-[#152e73] dark:bg-blue-600 dark:hover:bg-blue-500
-                    text-white font-medium text-sm
-                    transition-all duration-300
-                    hover:shadow-lg hover:shadow-blue-900/20 dark:hover:shadow-blue-500/20
-                    active:scale-[0.98]
-                ">
+                <button className={cn(
+                    "w-full flex items-center justify-center gap-2 py-2.5 rounded-xl",
+                    "bg-[#1E3A8A] hover:bg-[#152e73] dark:bg-blue-600 dark:hover:bg-blue-500",
+                    "text-white font-medium text-sm",
+                    "transition-all duration-300",
+                    "hover:shadow-lg hover:shadow-blue-900/20 dark:hover:shadow-blue-500/20",
+                    "active:scale-[0.98]"
+                )}>
                     <Plus className="w-4 h-4 transition-transform duration-300 hover:rotate-90" strokeWidth={2.5} />
                     <span>New Invoice</span>
                 </button>
@@ -170,25 +171,25 @@ const PrivateSideBar = () => {
                     Preferences
                 </p>
                 <nav className="flex flex-col gap-1 px-3">
-                    <button className="
-                        group relative w-full flex items-center justify-between px-3 py-2.5 rounded-lg
-                        text-sm font-medium transition-all duration-200 ease-out
-                        text-gray-500 dark:text-white/50
-                        hover:bg-gray-100 dark:hover:bg-white/5
-                        hover:text-gray-900 dark:hover:text-white/80
-                    ">
+                    <button className={cn(
+                        "group relative w-full flex items-center justify-between px-3 py-2.5 rounded-lg",
+                        "text-sm font-medium transition-all duration-200 ease-out",
+                        "text-gray-500 dark:text-white/50",
+                        "hover:bg-gray-100 dark:hover:bg-white/5",
+                        "hover:text-gray-900 dark:hover:text-white/80"
+                    )}>
                         <div className="flex items-center gap-3 transition-transform duration-200 group-hover:translate-x-1">
                             <Settings className="w-4 h-4 shrink-0 transition-transform duration-500 group-hover:rotate-90" strokeWidth={2} />
                             <span className="leading-none">Settings</span>
                         </div>
                     </button>
-                    <button className="
-                        group relative w-full flex items-center justify-between px-3 py-2.5 rounded-lg
-                        text-sm font-medium transition-all duration-200 ease-out
-                        text-gray-500 dark:text-white/50
-                        hover:bg-gray-100 dark:hover:bg-white/5
-                        hover:text-gray-900 dark:hover:text-white/80
-                    ">
+                    <button className={cn(
+                        "group relative w-full flex items-center justify-between px-3 py-2.5 rounded-lg",
+                        "text-sm font-medium transition-all duration-200 ease-out",
+                        "text-gray-500 dark:text-white/50",
+                        "hover:bg-gray-100 dark:hover:bg-white/5",
+                        "hover:text-gray-900 dark:hover:text-white/80"
+                    )}>
                         <div className="flex items-center gap-3 transition-transform duration-200 group-hover:translate-x-1">
                             <HelpCircle className="w-4 h-4 shrink-0" strokeWidth={2} />
                             <span className="leading-none">Help & Support</span>
