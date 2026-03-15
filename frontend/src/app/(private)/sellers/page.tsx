@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { TopNav } from "@/components/layout/TopNav";
+import { Sidebar } from "@/components/layout/Sidebar";
+import { BottomNav } from "@/components/layout/BottomNav";
 import { SellerCard } from "@/components/sellers/SellerCard";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Chip } from "@/components/ui/Chip";
@@ -25,12 +28,17 @@ export default function SellersPage() {
   );
 
   return (
-    <div className="relative min-h-screen lg:max-w-[1200px] lg:mx-auto lg:my-6 lg:rounded-[40px] lg:border lg:border-border/10 overflow-hidden flex flex-col bg-surface dark:bg-[#111318] shadow-premium">
+    <div className="responsive-layout bg-muted dark:bg-black">
+      <Sidebar />
+
+      <main className="app-content relative min-h-screen shadow-2xl md:my-4 md:rounded-3xl md:border md:border-border/10 overflow-hidden flex flex-col bg-surface dark:bg-[#111318]">
         {/* Decorative Background Glows */}
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
         <div className="absolute bottom-[10%] right-[-10%] w-[30%] h-[30%] bg-secondary/5 blur-[100px] rounded-full pointer-events-none" />
 
-        <div className="flex-1 p-6 md:p-10 space-y-8 md:space-y-12 z-10 pt-12">
+        <TopNav />
+        
+        <div className="flex-1 p-6 md:p-10 space-y-8 md:space-y-12 overflow-y-auto pb-32 md:pb-16 z-10 pt-12">
           {/* Header Section */}
           <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 px-1">
             <div className="space-y-1 md:space-y-2">
@@ -51,8 +59,9 @@ export default function SellersPage() {
           </header>
 
           {/* Category Filter Chips */}
-          <div className="space-y-4">
-            <section className="flex gap-2 overflow-x-auto pb-4 no-scrollbar px-1 -mx-1">
+          <div className="space-y-5">
+            <h2 className="text-[11px] font-black text-muted-foreground/70 uppercase tracking-[0.2em] px-1 dark:text-gray-500">Filter by Category</h2>
+            <section className="flex gap-2 md:gap-3 overflow-x-auto pb-4 no-scrollbar px-1 -mx-1">
               {CATEGORIES.map(cat => (
                 <Chip 
                   key={cat} 
@@ -65,8 +74,8 @@ export default function SellersPage() {
             </section>
           </div>
           
-          <div className="grid grid-cols-1">
-            <Card className="border-border/40 dark:border-white/10 shadow-card overflow-hidden rounded-3xl bg-white dark:bg-[#1A1D24]">
+          <div className="grid grid-cols-1 gap-6">
+            <Card className="border-border/40 dark:border-white/10 shadow-card overflow-hidden min-h-[400px] rounded-3xl bg-white dark:bg-[#1A1D24]">
               <CardContent className="p-0">
                 {filteredSellers.length > 0 ? (
                   filteredSellers.map((seller) => (
@@ -87,6 +96,9 @@ export default function SellersPage() {
             </Card>
           </div>
         </div>
+      </main>
+
+      <BottomNav />
     </div>
   );
 }

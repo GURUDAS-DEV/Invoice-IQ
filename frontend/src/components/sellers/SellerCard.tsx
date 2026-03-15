@@ -23,7 +23,7 @@ export function SellerCard({ seller }: SellerCardProps) {
 
   return (
     <div className={cn(
-      "flex justify-between items-center py-4 px-4 md:py-5 md:px-6 border-b border-border/5 last:border-0 hover:bg-muted/30 active:bg-muted/50 transition-all duration-300 ease-premium cursor-pointer group/item border-l-4",
+      "flex justify-between items-center py-4 px-4 md:py-5 md:px-6 border-b border-border/5 last:border-0 hover:bg-muted/30 active:bg-muted/50 hover:scale-[1.01] hover:shadow-lg hover:shadow-black/5 transition-all duration-300 ease-premium cursor-pointer group/item border-l-4",
       borderColor
     )}>
       <div className="flex items-center gap-3 md:gap-4 flex-1 min-w-0">
@@ -45,7 +45,7 @@ export function SellerCard({ seller }: SellerCardProps) {
       
       <div className="flex items-center gap-4 md:gap-8 shrink-0 ml-2">
         {/* Trend Section */}
-        <div className="hidden sm:flex flex-col items-end gap-1 min-w-20">
+        <div className="hidden sm:flex flex-col items-end gap-1 min-w-[100px]">
           <span className="text-[9px] font-bold text-muted-foreground uppercase">Price Trend</span>
           <PriceSparkline data={seller.prices} variant={trendDirection} />
         </div>
