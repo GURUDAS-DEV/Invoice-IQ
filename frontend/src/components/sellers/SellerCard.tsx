@@ -1,9 +1,7 @@
-"use client";
-
 import { Badge } from "@/components/ui/Badge";
 import { PriceSparkline } from "@/components/ui/PriceSparkline";
 import { Supplier, getTrendDirection } from "@/types/supplier";
-import { ShoppingBag, TrendingUp } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface SellerCardProps {
@@ -47,12 +45,13 @@ export function SellerCard({ seller }: SellerCardProps) {
       
       <div className="flex items-center gap-8 h-full">
         {/* Trend Section */}
-        <div className="hidden sm:flex flex-col items-center justify-center min-w-[100px]">
+        <div className="hidden sm:flex flex-col items-end gap-1 min-w-20">
+          <span className="text-[9px] font-bold text-muted-foreground uppercase">Price Trend</span>
           <PriceSparkline data={seller.prices} variant={trendDirection} />
         </div>
 
         {/* Status Area */}
-        <div className="flex flex-col items-end justify-center min-w-[85px]">
+        <div className="flex flex-col items-end justify-center min-w-22.5 h-10">
           <Badge 
             variant={seller.statusVariant} 
             className="font-bold text-[10px] tracking-wide py-1.5 px-3 shadow-sm border-white/10 group-hover/item:scale-105 transition-transform"
