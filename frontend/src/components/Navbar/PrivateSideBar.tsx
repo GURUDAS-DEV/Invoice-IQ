@@ -54,47 +54,48 @@ const PrivateSideBar = () => {
     }
 
     return (
-        <aside className="
-            fixed left-0 top-0 h-screen w-[220px] z-40
-            flex flex-col
-            bg-white dark:bg-[#111318]
-            border-r border-gray-100 dark:border-white/6
-            py-5
-            font-outfit
-            transition-colors duration-300
-            shadow-[1px_0_10px_rgba(0,0,0,0.02)] dark:shadow-none
-        ">
+        <aside className={cn(
+            "fixed left-0 top-0 h-screen w-[220px] z-60",
+            "flex flex-col",
+            "bg-white dark:bg-[#111318]",
+            "border-r border-gray-100/30 dark:border-white/2",
+            "py-5",
+            "font-outfit",
+            "transition-all duration-300",
+            "shadow-[1px_0_10px_rgba(0,0,0,0.02)] dark:shadow-none"
+        )}>
             {/* ── Brand ─────────────────────────────────── */}
-            <div className="flex px-5 mb-6 select-none">
+            <div className="flex px-5 mb-8 select-none">
                 <Link
                     href="/home"
-                    className="group relative w-full h-14 flex justify-center items-center rounded-lg overflow-hidden shrink-0 mt-2 transition-transform duration-300 hover:scale-[1.03] active:scale-95 cursor-pointer"
+                    className="group relative w-full h-16 flex justify-center items-center transition-all duration-300 hover:scale-[1.03] active:scale-95 cursor-pointer"
                 >
                     <Image
                         src="/Logo.png"
                         alt="Invoice IQ"
                         fill={true}
-                        className="object-contain drop-shadow-sm dark:hidden"
+                        className="object-contain dark:hidden"
                     />
                     <Image
                         src="/DarkLogo.png"
                         alt="Invoice IQ"
                         fill={true}
-                        className="object-contain hidden dark:block drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+                        className="object-contain hidden dark:block"
                     />
                 </Link>
             </div>
 
+
             {/* ── Quick Action Button ────────────────────── */}
             <div className="px-4 mb-6">
-                <button className="
-                    w-full flex items-center justify-center gap-2 py-2.5 rounded-xl
-                    bg-[#1E3A8A] hover:bg-[#152e73] dark:bg-blue-600 dark:hover:bg-blue-500
-                    text-white font-medium text-sm
-                    transition-all duration-300
-                    hover:shadow-lg hover:shadow-blue-900/20 dark:hover:shadow-blue-500/20
-                    active:scale-[0.98]
-                ">
+                <button className={cn(
+                    "w-full flex items-center justify-center gap-2 py-2.5 rounded-xl",
+                    "bg-[#1E3A8A] hover:bg-[#152e73] dark:bg-blue-600 dark:hover:bg-blue-500",
+                    "text-white font-medium text-sm",
+                    "transition-all duration-300",
+                    "hover:shadow-lg hover:shadow-blue-900/20 dark:hover:shadow-blue-500/20",
+                    "active:scale-[0.98]"
+                )}>
                     <Plus className="w-4 h-4 transition-transform duration-300 hover:rotate-90" strokeWidth={2.5} />
                     <span>New Invoice</span>
                 </button>
@@ -133,12 +134,12 @@ const PrivateSideBar = () => {
                             >
                                 {/* Active indicator pill sidebar */}
                                 {active && (
-                                    <span className="
-                                        absolute left-0 top-1/2 -translate-y-1/2
-                                        w-[3px] h-5 rounded-r-full
-                                        bg-[#1E3A8A] dark:bg-blue-400
-                                        animate-in fade-in slide-in-from-left-1 duration-300
-                                    "/>
+                                    <span className={cn(
+                                        "absolute left-0 top-1/2 -translate-y-1/2",
+                                        "w-[3px] h-5 rounded-r-full",
+                                        "bg-[#1E3A8A] dark:bg-blue-400",
+                                        "animate-in fade-in slide-in-from-left-1 duration-300"
+                                    )}/>
                                 )}
 
                                 {/* Hover translation wrapper */}
@@ -170,25 +171,25 @@ const PrivateSideBar = () => {
                     Preferences
                 </p>
                 <nav className="flex flex-col gap-1 px-3">
-                    <button className="
-                        group relative w-full flex items-center justify-between px-3 py-2.5 rounded-lg
-                        text-sm font-medium transition-all duration-200 ease-out
-                        text-gray-500 dark:text-white/50
-                        hover:bg-gray-100 dark:hover:bg-white/5
-                        hover:text-gray-900 dark:hover:text-white/80
-                    ">
+                    <button className={cn(
+                        "group relative w-full flex items-center justify-between px-3 py-2.5 rounded-lg",
+                        "text-sm font-medium transition-all duration-200 ease-out",
+                        "text-gray-500 dark:text-white/50",
+                        "hover:bg-gray-100 dark:hover:bg-white/5",
+                        "hover:text-gray-900 dark:hover:text-white/80"
+                    )}>
                         <div className="flex items-center gap-3 transition-transform duration-200 group-hover:translate-x-1">
                             <Settings className="w-4 h-4 shrink-0 transition-transform duration-500 group-hover:rotate-90" strokeWidth={2} />
                             <span className="leading-none">Settings</span>
                         </div>
                     </button>
-                    <button className="
-                        group relative w-full flex items-center justify-between px-3 py-2.5 rounded-lg
-                        text-sm font-medium transition-all duration-200 ease-out
-                        text-gray-500 dark:text-white/50
-                        hover:bg-gray-100 dark:hover:bg-white/5
-                        hover:text-gray-900 dark:hover:text-white/80
-                    ">
+                    <button className={cn(
+                        "group relative w-full flex items-center justify-between px-3 py-2.5 rounded-lg",
+                        "text-sm font-medium transition-all duration-200 ease-out",
+                        "text-gray-500 dark:text-white/50",
+                        "hover:bg-gray-100 dark:hover:bg-white/5",
+                        "hover:text-gray-900 dark:hover:text-white/80"
+                    )}>
                         <div className="flex items-center gap-3 transition-transform duration-200 group-hover:translate-x-1">
                             <HelpCircle className="w-4 h-4 shrink-0" strokeWidth={2} />
                             <span className="leading-none">Help & Support</span>
@@ -199,17 +200,17 @@ const PrivateSideBar = () => {
 
             {/* ── Footer / User Profile ─────────────────── */}
             <div className="mt-auto px-3 pt-4 pb-2 border-t border-gray-100 dark:border-white/6">
-                <div className="
-                    group flex items-center gap-3 p-2 rounded-xl cursor-pointer
-                    transition-colors duration-200
-                    hover:bg-gray-100 dark:hover:bg-white/5
-                ">
-                    <div className="
-                        w-9 h-9 rounded-full shrink-0 shadow-inner overflow-hidden
-                        bg-linear-to-tr from-[#1E3A8A] to-blue-400 dark:from-blue-600 dark:to-blue-400 
-                        flex items-center justify-center
-                        transition-transform duration-300 group-hover:scale-105
-                    ">
+                <div className={cn(
+                    "group flex items-center gap-3 p-2 rounded-xl cursor-pointer",
+                    "transition-colors duration-200",
+                    "hover:bg-gray-100 dark:hover:bg-white/5"
+                )}>
+                    <div className={cn(
+                        "w-9 h-9 rounded-full shrink-0 shadow-inner overflow-hidden",
+                        "bg-linear-to-tr from-[#1E3A8A] to-blue-400 dark:from-blue-600 dark:to-blue-400",
+                        "flex items-center justify-center",
+                        "transition-transform duration-300 group-hover:scale-105"
+                    )}>
                         <span className="text-white text-xs font-bold leading-none">JD</span>
                     </div>
 

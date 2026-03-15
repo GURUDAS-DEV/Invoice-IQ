@@ -26,6 +26,12 @@
   --color-destructive-foreground: #FFFFFF;
 
   --color-border: #E2E8F0;
+  --color-border-primary: var(--color-border);
+
+  --color-background-primary: var(--color-background);
+  --color-background-secondary: var(--color-surface);
+  --color-card-foreground: var(--color-foreground);
+  --color-text-tertiary: var(--color-muted-foreground);
 
   --radius-lg: 1rem;
   --radius-md: 0.75rem;
@@ -57,16 +63,27 @@
 }
 
 @layer base {
+  .dark {
+    --color-background: #0B0E14;
+    --color-surface: #111318;
+    --color-foreground: #F8FAFC;
+    --color-muted: #1A1D24;
+    --color-muted-foreground: #94A3B8;
+    --color-border: rgba(255, 255, 255, 0.1);
+    --color-border-primary: var(--color-border);
+
+    --color-background-primary: var(--color-background);
+    --color-background-secondary: var(--color-surface);
+    --color-card-foreground: var(--color-foreground);
+    --color-text-tertiary: var(--color-muted-foreground);
+  }
+
   * {
     @apply border-border;
   }
 
   body {
-    @apply bg-background text-foreground font-outfit antialiased;
-  }
-
-  * {
-    @apply border-border;
+    @apply bg-background text-foreground font-outfit antialiased transition-colors duration-300;
   }
 
   /* 
@@ -80,7 +97,7 @@
 
   /* The actual "Paper/Sheet" where content lives */
   .app-content {
-    @apply flex-1 flex flex-col mx-auto bg-surface transition-all duration-300 shadow-premium border-x border-border/10;
+    @apply flex-1 flex flex-col mx-auto bg-surface transition-colors duration-300 shadow-premium border-x border-border/10;
     width: 100%;
     max-width: 720px;
     /* Focus Constraint */
