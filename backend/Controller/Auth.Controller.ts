@@ -16,7 +16,7 @@ const cookieOptions = {
 };
 
 
-export const LoginWithGoogle = async (req: Request, res: Response): Promise<Response> => {
+export const LoginWithGoogle = (req: Request, res: Response): Response => {
     try {
         const googleOAuthURL = "https://accounts.google.com/o/oauth2/v2/auth";
         const params = new URLSearchParams({
