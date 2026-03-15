@@ -8,14 +8,12 @@ export default function PrivateLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="h-screen flex flex-col overflow-hidden bg-background">
-      {/* TopBar is fixed at z-50 */}
-      <PrivateTopBar />
-      
-      <div className="flex flex-1 overflow-hidden pt-16">
-        {/* Sidebar is fixed at z-60 */}
-        <div className="hidden lg:block w-[220px] shrink-0">
-          <PrivateSideBar />
+    <div className="flex min-h-screen bg-background">
+      <PrivateSideBar />
+      <main className="flex-1 dark:bg-black min-h-screen flex flex-col min-w-0">
+        <PrivateTopBar />
+        <div className="flex-1 p-4 md:p-6 dark:bg-black">
+          {children}
         </div>
         
         {/* Main scrollable content area */}

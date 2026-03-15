@@ -13,13 +13,15 @@ import {
   Moon,
 } from "lucide-react"
 import { useTheme } from "next-themes"
-import { cn } from "@/lib/utils"
+import { toast } from "sonner"
+import { useRouter } from "next/navigation"
 
 const PrivateTopBar = () => {
-    const [isOpen, setIsOpen] = useState(false)
-    const dropdownRef = useRef<HTMLDivElement>(null)
-    const { theme, setTheme } = useTheme()
-    const [mounted, setMounted] = useState(false)
+    const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+    const { theme, setTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+    const router = useRouter();
 
     // Close dropdown on click outside
     useEffect(() => {
@@ -31,7 +33,27 @@ const PrivateTopBar = () => {
         }
         document.addEventListener("mousedown", handleClickOutside)
         return () => document.removeEventListener("mousedown", handleClickOutside)
-    }, [])
+    }, []);
+
+    const handleLogout = async () => {
+        try{
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/logout`, {
+                method: "POST",
+                credentials: "include", // Important to include cookies
+            });
+            const data = await response.json();
+            console.log("Logout response:", data);
+            if(!response.ok){
+                throw new Error("Logout failed");
+            }
+            toast.success("Logged out successfully!");
+            router.push("/home");
+        }
+        catch(e){
+            toast .error("Logout failed. Please try again.");
+            console.error("Logout failed:", e);
+        }
+    }
 
     return (
         <header className={cn(
@@ -175,12 +197,12 @@ const PrivateTopBar = () => {
 
                     {/* Section 3 */}
                     <div className="p-1.5">
-                        <button className={cn(
-                            "w-full flex items-center gap-3 px-3 py-2 rounded-xl",
-                            "text-sm font-medium text-red-600 dark:text-red-400",
-                            "hover:bg-red-50 dark:hover:bg-red-500/10 hover:text-red-700 dark:hover:text-red-300",
-                            "transition-colors duration-200"
-                        )}>
+                        <button onClick={handleLogout} className="
+                            w-full flex items-center gap-3 px-3 py-2 rounded-xl
+                            text-sm font-medium text-red-600 dark:text-red-400
+                            hover:bg-red-50 dark:hover:bg-red-500/10 hover:text-red-700 dark:hover:text-red-300
+                            transition-colors duration-200
+                        ">
                             <LogOut className="w-4 h-4 opacity-80" />
                             Logout
                         </button>
