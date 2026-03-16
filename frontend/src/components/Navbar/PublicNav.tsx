@@ -44,7 +44,7 @@ const Navbar = () => {
                   className="dark:hidden shrink-0"
                 />
                 <Image
-                  src="/DarkLogo.png"
+                  src="/darkLogo.png"
                   alt="InvoiceIQ Logo"
                   height={120}
                   width={120}

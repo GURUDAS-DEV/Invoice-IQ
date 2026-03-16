@@ -38,8 +38,8 @@ function Login() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-start bg-slate-50 dark:bg-[#09090b] relative overflow-hidden font-outfit px-4 pt-32 pb-20 transition-colors duration-300">
       {/* Dynamic Background Elements */}
-      <div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] bg-blue-600/10 dark:bg-blue-600/20 blur-[130px] rounded-full animate-pulse pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-5%] w-[500px] h-[500px] bg-indigo-600/10 dark:bg-indigo-600/20 blur-[130px] rounded-full animate-pulse transition-all duration-1000 pointer-events-none" />
+      <div className="absolute top-[-10%] left-[-5%] w-125 h-125 bg-blue-600/10 dark:bg-blue-600/20 blur-[130px] rounded-full animate-pulse pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-5%] w-125 h-125 bg-indigo-600/10 dark:bg-indigo-600/20 blur-[130px] rounded-full animate-pulse transition-all duration-1000 pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.02] dark:opacity-[0.05] pointer-events-none invert dark:invert-0" />
 
       <div className="w-full max-w-md z-10 animate-in fade-in zoom-in duration-500 flex flex-col items-center">
