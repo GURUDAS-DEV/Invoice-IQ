@@ -28,7 +28,7 @@ const navItems = [
     },
     {
         label: "Sellers",
-        href: "/sellers",
+        href: "/home/seller",
         icon: Users,
     },
     {
