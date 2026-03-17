@@ -136,15 +136,21 @@ export const addDeliveryByManualController = async (req: Request, res: Response)
             });
         }
 
-        if (!sellerId || !productId || !unit) {
+        if (!productId || !unit) {
             return res.status(400).json({
-                message: "sellerId, productId and unit are required."
+                message: "productId and unit are required."
             });
         }
 
-        if (!mongoose.Types.ObjectId.isValid(String(sellerId)) || !mongoose.Types.ObjectId.isValid(String(productId))) {
+        if (!mongoose.Types.ObjectId.isValid(String(productId))) {
             return res.status(400).json({
-                message: "sellerId and productId must be valid ObjectIds."
+                message: "productId must be a valid ObjectId."
+            });
+        }
+
+        if (sellerId && !mongoose.Types.ObjectId.isValid(String(sellerId))) {
+            return res.status(400).json({
+                message: "sellerId must be a valid ObjectId when provided."
             });
         }
 
@@ -155,25 +161,30 @@ export const addDeliveryByManualController = async (req: Request, res: Response)
         }
 
         const userObjectId = new mongoose.Types.ObjectId(userId);
-        const sellerObjectId = new mongoose.Types.ObjectId(String(sellerId));
         const productObjectId = new mongoose.Types.ObjectId(String(productId));
 
-        const [sellerExists, productExists] = await Promise.all([
-            SellerModel.exists({ _id: sellerObjectId, userId: userObjectId }),
-            ProductModel.findOne({ _id: productObjectId, userId: userObjectId, sellerId: sellerObjectId })
-                .select({ _id: 1, unit: 1 })
-                .lean()
-        ]);
-
-        if (!sellerExists) {
-            return res.status(404).json({
-                message: "Seller not found for this user."
-            });
-        }
+        const productExists = await ProductModel.findOne({ _id: productObjectId, userId: userObjectId })
+            .select({ _id: 1, unit: 1, sellerId: 1 })
+            .lean();
 
         if (!productExists) {
             return res.status(404).json({
-                message: "Product not found for the selected seller."
+                message: "Product not found for this user."
+            });
+        }
+
+        const sellerObjectId = new mongoose.Types.ObjectId(String(productExists.sellerId));
+        const sellerExists = await SellerModel.exists({ _id: sellerObjectId, userId: userObjectId });
+
+        if (!sellerExists) {
+            return res.status(404).json({
+                message: "Seller linked to product not found for this user."
+            });
+        }
+
+        if (sellerId && String(sellerId) !== String(productExists.sellerId)) {
+            return res.status(400).json({
+                message: "Selected seller does not match the product owner seller."
             });
         }
 
