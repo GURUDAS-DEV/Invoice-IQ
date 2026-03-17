@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
+import { toast } from "sonner";
 import {
   Plus,
   Search,
@@ -19,87 +20,63 @@ import {
 } from "lucide-react";
 
 interface Seller {
-  id: string;
+  _id?: string;
+  id?: string;
   name: string;
-  location: string;
+  mobile: string;
   address: string;
-  contact: string;
-  nickname: string;
-  notes: string;
-  isFavorite: boolean;
-  lastDelivery: string;
-  monthlySpend: string;
-  status: "active" | "inactive";
+  contact?: string;
+  nickname?: string;
+  notes?: string;
+  isFavorite?: boolean;
+  location?: string;
+  lastDelivery?: string;
+  monthlySpend?: string;
+  status?: "active" | "inactive";
 }
-
-const INITIAL_SELLERS: Seller[] = [
-  {
-    id: "1",
-    name: "Om Trading Co.",
-    location: "Dadar, Mumbai",
-    address: "Shop 4, Gokhale Road, Dadar West, Mumbai - 400028",
-    contact: "+91 98201 12345",
-    nickname: "Om Bhai",
-    notes: "Delivers every Monday and Thursday.",
-    isFavorite: true,
-    lastDelivery: "Mar 15, 2026",
-    monthlySpend: "₹32,500",
-    status: "active",
-  },
-  {
-    id: "2",
-    name: "Bharat Distributors",
-    location: "Vashi, Navi Mumbai",
-    address: "Plot 22, Sector 19A, Vashi, Navi Mumbai - 400703",
-    contact: "+91 99870 56789",
-    nickname: "",
-    notes: "",
-    isFavorite: false,
-    lastDelivery: "Mar 12, 2026",
-    monthlySpend: "₹41,200",
-    status: "active",
-  },
-  {
-    id: "3",
-    name: "Sai Dairy Products",
-    location: "Thane West",
-    address: "Near Panchpakhadi, Thane West - 400601",
-    contact: "+91 98330 44321",
-    nickname: "Sai Doodh",
-    notes: "",
-    isFavorite: true,
-    lastDelivery: "Mar 10, 2026",
-    monthlySpend: "₹18,750",
-    status: "active",
-  },
-  {
-    id: "4",
-    name: "Laxmi Spices",
-    location: "Kurla, Mumbai",
-    address: "Shop 7, LBS Marg, Kurla West, Mumbai - 400070",
-    contact: "+91 70451 98765",
-    nickname: "",
-    notes: "Prices spike during festival season.",
-    isFavorite: false,
-    lastDelivery: "Feb 28, 2026",
-    monthlySpend: "₹9,300",
-    status: "inactive",
-  },
-];
 
 const EMPTY_FORM = { name: "", location: "", address: "", contact: "", nickname: "", notes: "", isFavorite: false };
 
 export default function SellersPage() {
-  const [sellers, setSellers] = useState<Seller[]>(INITIAL_SELLERS);
+  const [sellers, setSellers] = useState<Seller[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [form, setForm] = useState(EMPTY_FORM);
   const [formErrors, setFormErrors] = useState<{ name?: string }>({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
+
+  // Fetch sellers from backend
+  useEffect(() => {
+    const fetchSellers = async () => {
+      try {
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:9000";
+        const response = await fetch(`${baseUrl}/api/sellerManagement/getSeller`, {
+          credentials: "include"
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch sellers");
+        }
+
+        const data = await response.json();
+        const sellersList = Array.isArray(data.data) ? data.data : [];
+        setSellers(sellersList);
+      } catch (error) {
+        console.error("Error fetching sellers:", error);
+        toast.error("Failed to load sellers");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchSellers();
+  }, []);
 
   const filteredSellers = useMemo(() => {
     return sellers.filter((s) =>
       s.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      s.location.toLowerCase().includes(searchQuery.toLowerCase())
+      (s.location || "").toLowerCase().includes(searchQuery.toLowerCase())
     );
   }, [sellers, searchQuery]);
 
@@ -113,26 +90,45 @@ export default function SellersPage() {
     setIsModalOpen(false);
   }
 
-  function handleSave() {
+  async function handleSave() {
     if (!form.name.trim()) {
       setFormErrors({ name: "Seller name is required." });
       return;
     }
-    const newSeller: Seller = {
-      id: String(Date.now()),
-      name: form.name.trim(),
-      location: form.location.trim() || "—",
-      address: form.address.trim() || "—",
-      contact: form.contact.trim() || "—",
-      nickname: form.nickname.trim(),
-      notes: form.notes.trim(),
-      isFavorite: form.isFavorite,
-      lastDelivery: "—",
-      monthlySpend: "₹0",
-      status: "active",
-    };
-    setSellers((prev) => [newSeller, ...prev]);
-    closeModal();
+
+    try {
+      setIsSaving(true);
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:9000";
+      const response = await fetch(`${baseUrl}/api/sellerManagement/createSeller`, {
+        method: "POST",
+        headers: {
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          name: form.name.trim(),
+          mobile: form.contact.trim() || "",
+          address: form.address.trim() || "",
+          nickname: form.nickname.trim() || undefined,
+          notes: form.notes.trim() || undefined,
+          isFavorite: form.isFavorite
+        })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to create seller");
+      }
+
+      const data = await response.json();
+      setSellers((prev) => [data.data, ...prev]);
+      toast.success("Seller added successfully!");
+      closeModal();
+    } catch (error) {
+      console.error("Error saving seller:", error);
+      toast.error(error instanceof Error ? error.message : "Failed to save seller");
+    } finally {
+      setIsSaving(false);
+    }
   }
 
   return (
@@ -159,19 +155,30 @@ export default function SellersPage() {
       </div>
 
       {/* ── Search ────────────────────────────────────────────── */}
-      <div className="relative w-full max-w-sm">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
-        <input
-          type="text"
-          placeholder="Search sellers..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full pl-9 pr-4 py-2 text-sm bg-white dark:bg-[#1A1D24] border border-gray-200 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400 dark:focus:border-blue-500 transition-all"
-        />
-      </div>
+      {!isLoading && (
+        <div className="relative w-full max-w-sm">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+          <input
+            type="text"
+            placeholder="Search sellers..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full pl-9 pr-4 py-2 text-sm bg-white dark:bg-[#1A1D24] border border-gray-200 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400 dark:focus:border-blue-500 transition-all"
+          />
+        </div>
+      )}
 
-      {/* ── Seller List ────────────────────────────────────────── */}
-      {filteredSellers.length > 0 ? (
+      {/* ── Loading State ─────────────────────────────────────── */}
+      {isLoading ? (
+        <div className="flex flex-col items-center justify-center py-24 px-6 bg-white dark:bg-[#1A1D24] border border-gray-100 dark:border-white/10 rounded-2xl shadow-xs">
+          <div className="w-14 h-14 bg-blue-50 dark:bg-blue-500/10 rounded-2xl flex items-center justify-center mb-5">
+            <Store className="w-7 h-7 text-blue-500 dark:text-blue-400 animate-spin" />
+          </div>
+          <h3 className="text-base font-semibold text-gray-900 dark:text-white">
+            Loading sellers...
+          </h3>
+        </div>
+      ) : filteredSellers.length > 0 ? (
         <div className="bg-white dark:bg-[#1A1D24] border border-gray-100 dark:border-white/10 rounded-2xl shadow-xs overflow-hidden">
           {/* Table Header */}
           <div className="hidden md:grid grid-cols-[1fr_160px_160px_32px] items-center px-6 py-3 border-b border-gray-100 dark:border-white/5">
@@ -183,8 +190,8 @@ export default function SellersPage() {
 
           {filteredSellers.map((seller, index) => (
             <Link
-              key={seller.id}
-              href={`/home/seller/${seller.id}`}
+              key={seller._id || seller.id}
+              href={`/home/seller/${seller._id || seller.id}`}
               className={`group grid grid-cols-[1fr_auto] md:grid-cols-[1fr_160px_160px_32px] items-center gap-4 px-6 py-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-white/3 transition-all ${
                 index !== 0 ? "border-t border-gray-100 dark:border-white/5" : ""
               }`}
@@ -202,7 +209,7 @@ export default function SellersPage() {
                   </p>
                   <div className="flex items-center gap-1 mt-0.5">
                     <MapPin className="w-3 h-3 text-gray-400 shrink-0" />
-                    <span className="text-xs text-gray-500 dark:text-gray-400 truncate">{seller.location}</span>
+                    <span className="text-xs text-gray-500 dark:text-gray-400 truncate">{seller.location || "—"}</span>
                   </div>
                 </div>
               </div>
@@ -212,7 +219,7 @@ export default function SellersPage() {
                 <div className="flex items-center gap-1 text-gray-400">
                   <Calendar className="w-3 h-3" />
                 </div>
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-200">{seller.lastDelivery}</span>
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-200">{seller.lastDelivery || "—"}</span>
               </div>
 
               {/* Monthly Spend */}
@@ -220,7 +227,7 @@ export default function SellersPage() {
                 <div className="flex items-center gap-1 text-gray-400">
                   <Wallet className="w-3 h-3" />
                 </div>
-                <span className="text-sm font-semibold text-gray-900 dark:text-white">{seller.monthlySpend}</span>
+                <span className="text-sm font-semibold text-gray-900 dark:text-white">{seller.monthlySpend || "₹0"}</span>
               </div>
 
               {/* Arrow */}
@@ -228,8 +235,27 @@ export default function SellersPage() {
             </Link>
           ))}
         </div>
+      ) : searchQuery && sellers.length > 0 ? (
+        /* ── No Search Results ──────────────────────────────── */
+        <div className="flex flex-col items-center justify-center py-24 px-6 bg-white dark:bg-[#1A1D24] border border-gray-100 dark:border-white/10 rounded-2xl shadow-xs">
+          <div className="w-14 h-14 bg-amber-50 dark:bg-amber-500/10 rounded-2xl flex items-center justify-center mb-5">
+            <Search className="w-7 h-7 text-amber-500 dark:text-amber-400" />
+          </div>
+          <h3 className="text-base font-semibold text-gray-900 dark:text-white">
+            No sellers match your search.
+          </h3>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 text-center max-w-xs">
+            Try searching with different keywords.
+          </p>
+          <button
+            onClick={() => setSearchQuery("")}
+            className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-[#1A1D24] border border-gray-200 dark:border-white/10 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 transition-colors"
+          >
+            Clear Search
+          </button>
+        </div>
       ) : (
-        /* ── Empty State ──────────────────────────────────────── */
+        /* ── No Sellers Added ────────────────────────────────── */
         <div className="flex flex-col items-center justify-center py-24 px-6 bg-white dark:bg-[#1A1D24] border border-gray-100 dark:border-white/10 rounded-2xl shadow-xs">
           <div className="w-14 h-14 bg-blue-50 dark:bg-blue-500/10 rounded-2xl flex items-center justify-center mb-5">
             <Store className="w-7 h-7 text-blue-500 dark:text-blue-400" />
@@ -238,14 +264,14 @@ export default function SellersPage() {
             No sellers added yet.
           </h3>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 text-center max-w-xs">
-            Add your first supplier to start tracking purchases.
+            Add your first supplier to start tracking purchases and managing deliveries.
           </p>
           <button
             onClick={openModal}
             className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-linear-to-r from-[#1E3A8A] to-blue-600 hover:from-blue-800 hover:to-blue-700 text-white text-sm font-medium rounded-xl transition-all shadow-sm hover:shadow-md active:scale-[0.98]"
           >
             <Plus className="w-4 h-4" />
-            Add Seller
+            Add Your First Seller
           </button>
         </div>
       )}
@@ -440,9 +466,10 @@ export default function SellersPage() {
               </button>
               <button
                 onClick={handleSave}
-                className="px-5 py-2 text-sm font-medium text-white bg-linear-to-r from-[#1E3A8A] to-blue-600 hover:from-blue-800 hover:to-blue-700 rounded-xl transition-all shadow-sm hover:shadow-md active:scale-[0.98]"
+                disabled={isSaving}
+                className="px-5 py-2 text-sm font-medium text-white bg-linear-to-r from-[#1E3A8A] to-blue-600 hover:from-blue-800 hover:to-blue-700 rounded-xl transition-all shadow-sm hover:shadow-md active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Save Seller
+                {isSaving ? "Saving..." : "Save Seller"}
               </button>
             </div>
           </div>

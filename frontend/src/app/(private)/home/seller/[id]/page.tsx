@@ -1,8 +1,9 @@
 
 "use client";
 
-import React, { use } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { toast } from "sonner";
 import {
   ArrowLeft,
   MapPin,
@@ -41,110 +42,21 @@ interface PriceInsight {
 
 interface SellerDetail {
   id: string;
+  _id?: string;
   name: string;
-  location: string;
+  location?: string;
   address: string;
-  contact: string;
-  nickname: string;
-  notes: string;
-  isFavorite: boolean;
+  mobile: string;
+  contact?: string;
+  nickname?: string;
+  notes?: string;
+  isFavorite?: boolean;
   totalSpend: string;
   totalDeliveries: number;
   totalProducts: number;
   products: Product[];
   insights: PriceInsight[];
 }
-
-// ─── Mock Data ─────────────────────────────────────────────────────────────────
-
-const SELLER_DATA: Record<string, SellerDetail> = {
-  "1": {
-    id: "1",
-    name: "Om Trading Co.",
-    location: "Dadar, Mumbai",
-    address: "Shop 4, Gokhale Road, Dadar West, Mumbai - 400028",
-    contact: "+91 98201 12345",
-    nickname: "Om Bhai",
-    notes: "Delivers every Monday and Thursday.",
-    isFavorite: true,
-    totalSpend: "₹1,02,500",
-    totalDeliveries: 38,
-    totalProducts: 12,
-    products: [
-      { id: "p1", name: "Sunflower Oil", lastPurchaseDate: "Mar 15, 2026", lastQuantity: "20 L", lastPrice: "₹140 / L", unit: "L" },
-      { id: "p2", name: "Mustard Oil", lastPurchaseDate: "Mar 15, 2026", lastQuantity: "10 L", lastPrice: "₹175 / L", unit: "L" },
-      { id: "p3", name: "Groundnut Oil", lastPurchaseDate: "Mar 08, 2026", lastQuantity: "15 L", lastPrice: "₹160 / L", unit: "L" },
-      { id: "p4", name: "Ghee (Tin)", lastPurchaseDate: "Mar 01, 2026", lastQuantity: "5 kg", lastPrice: "₹580 / kg", unit: "kg" },
-    ],
-    insights: [
-      { id: "i1", product: "Mustard Oil", direction: "up", change: "+₹10", description: "Price increased by ₹10 since last purchase." },
-      { id: "i2", product: "Sunflower Oil", direction: "down", change: "−₹5", description: "Price decreased by ₹5 this month." },
-      { id: "i3", product: "Ghee (Tin)", direction: "up", change: "+₹30", description: "Price increased by ₹30 compared to last month." },
-    ],
-  },
-  "2": {
-    id: "2",
-    name: "Bharat Distributors",
-    location: "Vashi, Navi Mumbai",
-    address: "Plot 22, Sector 19A, Vashi, Navi Mumbai - 400703",
-    contact: "+91 99870 56789",
-    nickname: "",
-    notes: "",
-    isFavorite: false,
-    totalSpend: "₹2,14,800",
-    totalDeliveries: 54,
-    totalProducts: 18,
-    products: [
-      { id: "p1", name: "Basmati Rice", lastPurchaseDate: "Mar 12, 2026", lastQuantity: "50 kg", lastPrice: "₹120 / kg", unit: "kg" },
-      { id: "p2", name: "Toor Dal", lastPurchaseDate: "Mar 12, 2026", lastQuantity: "25 kg", lastPrice: "₹145 / kg", unit: "kg" },
-      { id: "p3", name: "Wheat Flour", lastPurchaseDate: "Mar 05, 2026", lastQuantity: "100 kg", lastPrice: "₹38 / kg", unit: "kg" },
-      { id: "p4", name: "Sugar", lastPurchaseDate: "Feb 28, 2026", lastQuantity: "50 kg", lastPrice: "₹42 / kg", unit: "kg" },
-      { id: "p5", name: "Chana Dal", lastPurchaseDate: "Feb 20, 2026", lastQuantity: "30 kg", lastPrice: "₹92 / kg", unit: "kg" },
-    ],
-    insights: [
-      { id: "i1", product: "Basmati Rice", direction: "up", change: "+₹15", description: "Price increased by ₹15 compared to last month." },
-      { id: "i2", product: "Sugar", direction: "down", change: "−₹3", description: "Price decreased by ₹3 since last purchase." },
-      { id: "i3", product: "Toor Dal", direction: "up", change: "+₹8", description: "Price increased by ₹8 this week." },
-    ],
-  },
-  "3": {
-    id: "3",
-    name: "Sai Dairy Products",
-    location: "Thane West",
-    address: "Near Panchpakhadi, Thane West - 400601",
-    contact: "+91 98330 44321",
-    nickname: "Sai Doodh",
-    notes: "",
-    isFavorite: true,
-    totalSpend: "₹68,250",
-    totalDeliveries: 22,
-    totalProducts: 8,
-    products: [
-      { id: "p1", name: "Full Cream Milk", lastPurchaseDate: "Mar 10, 2026", lastQuantity: "100 L", lastPrice: "₹58 / L", unit: "L" },
-      { id: "p2", name: "Paneer", lastPurchaseDate: "Mar 10, 2026", lastQuantity: "10 kg", lastPrice: "₹340 / kg", unit: "kg" },
-      { id: "p3", name: "Curd (Dahi)", lastPurchaseDate: "Mar 08, 2026", lastQuantity: "20 kg", lastPrice: "₹65 / kg", unit: "kg" },
-    ],
-    insights: [
-      { id: "i1", product: "Paneer", direction: "down", change: "−₹20", description: "Price decreased by ₹20 this month." },
-      { id: "i2", product: "Full Cream Milk", direction: "down", change: "−₹2", description: "Price slightly decreased by ₹2 per litre." },
-    ],
-  },
-  "4": {
-    id: "4",
-    name: "Laxmi Spices",
-    location: "Kurla, Mumbai",
-    address: "Shop 7, LBS Marg, Kurla West, Mumbai - 400070",
-    contact: "+91 70451 98765",
-    nickname: "",
-    notes: "Prices spike during festival season.",
-    isFavorite: false,
-    totalSpend: "₹38,700",
-    totalDeliveries: 14,
-    totalProducts: 22,
-    products: [],
-    insights: [],
-  },
-};
 
 // ─── Sub-components ────────────────────────────────────────────────────────────
 
@@ -173,8 +85,70 @@ function StatCard({
 // ─── Page ──────────────────────────────────────────────────────────────────────
 
 export default function SellerDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params);
-  const seller = SELLER_DATA[id];
+  const [sellerId, setSellerId] = useState<string | null>(null);
+  const [seller, setSeller] = useState<SellerDetail | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const extractAndFetch = async () => {
+      try {
+        const { id } = await params;
+        setSellerId(id);
+        
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:9000";
+        const response = await fetch(
+          `${baseUrl}/api/sellerManagement/getSeller?userId=${id}`,
+          { credentials: "include" }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch seller");
+        }
+
+        const data = await response.json();
+        const sellerData = Array.isArray(data.data) ? data.data[0] : data.data;
+
+        if (sellerData) {
+          // Transform backend data to match frontend interface
+          const transformedSeller: SellerDetail = {
+            id: sellerData._id || id,
+            name: sellerData.name,
+            location: sellerData.address?.split(",")[0] || "—",
+            address: sellerData.address || "—",
+            mobile: sellerData.mobile || "",
+            contact: sellerData.mobile || "",
+            nickname: sellerData.nickname || "",
+            notes: sellerData.notes || "",
+            isFavorite: sellerData.isFavorite || false,
+            totalSpend: "₹0", // From dashboard data
+            totalDeliveries: 0, // From deliveries
+            totalProducts: 0, // From products
+            products: [],
+            insights: [],
+          };
+
+          setSeller(transformedSeller);
+        } else {
+          toast.error("Seller not found");
+        }
+      } catch (error) {
+        console.error("Error fetching seller:", error);
+        toast.error("Failed to load seller details");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    extractAndFetch();
+  }, [params]);
+  if (isLoading) {
+    return (
+      <div className="p-6 md:p-8 flex flex-col items-center justify-center min-h-[60vh]">
+        <div className="w-12 h-12 border-4 border-blue-200 dark:border-blue-900 border-t-blue-600 dark:border-t-blue-400 rounded-full animate-spin mb-4"></div>
+        <h2 className="text-base font-semibold text-gray-900 dark:text-white">Loading seller details...</h2>
+      </div>
+    );
+  }
 
   if (!seller) {
     return (
@@ -217,17 +191,19 @@ export default function SellerDetailPage({ params }: { params: Promise<{ id: str
             </div>
 
             <div className="flex flex-wrap items-center gap-4 mt-2">
-              <span className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400">
-                <MapPin className="w-3.5 h-3.5 shrink-0" />
-                {seller.location}
-              </span>
-              {seller.contact !== "—" && (
+              {seller.location && seller.location !== "—" && (
+                <span className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400">
+                  <MapPin className="w-3.5 h-3.5 shrink-0" />
+                  {seller.location}
+                </span>
+              )}
+              {seller.contact && seller.contact !== "—" && (
                 <span className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400">
                   <Phone className="w-3.5 h-3.5 shrink-0" />
                   {seller.contact}
                 </span>
               )}
-              {seller.address !== "—" && (
+              {seller.address && seller.address !== "—" && (
                 <span className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400">
                   <Building2 className="w-3.5 h-3.5 shrink-0" />
                   {seller.address}
