@@ -16,13 +16,13 @@ import {
 
 export default function HomePage() {
   return (
-    <div className="p-6 md:p-8 max-w-[1600px] mx-auto space-y-8 dark:bg-black">
+    <div className="p-6 md:p-8 max-w-1600px mx-auto space-y-8 dark:bg-black">
 
       {/* Header & Quick Actions */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <h1 className="text-2xl font-semibold text-gray-900 dark:text-white dark: tracking-tight">Dashboard</h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Here's your business summary for this month.</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Here&apos;s your business summary for this month.</p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <button className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-[#1A1D24] border border-gray-200 dark:border-white/10 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors shadow-xs">
@@ -110,7 +110,7 @@ export default function HomePage() {
 
           {/* Price Alerts */}
           <div className="bg-white dark:bg-[#1A1D24] border border-gray-100 dark:border-white/10 rounded-2xl shadow-xs overflow-hidden">
-            <div className="px-6 py-5 border-b border-gray-100 dark:border-white/10 flex items-center justify-between bg-gray-50/30 dark:bg-white/[0.01]">
+            <div className="px-6 py-5 border-b border-gray-100 dark:border-white/10 flex items-center justify-between bg-gray-50/30 dark:bg-white/1">
               <h3 className="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 text-amber-500" />
                 Price Alerts Detected
@@ -119,7 +119,7 @@ export default function HomePage() {
             </div>
             <div className="divide-y divide-gray-100 dark:divide-white/5">
 
-              <div className="p-6 hover:bg-gray-50/50 dark:hover:bg-white/[0.02] transition-colors group">
+              <div className="p-6 hover:bg-gray-50/50 dark:hover:bg-white/2 transition-colors group">
                 <div className="flex justify-between items-start mb-2">
                   <div>
                     <h4 className="font-medium text-gray-900 dark:text-white">Rice (25kg Bag)</h4>
@@ -143,7 +143,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="p-6 hover:bg-gray-50/50 dark:hover:bg-white/[0.02] transition-colors group">
+              <div className="p-6 hover:bg-gray-50/50 dark:hover:bg-white/2 transition-colors group">
                 <div className="flex justify-between items-start mb-2">
                   <div>
                     <h4 className="font-medium text-gray-900 dark:text-white">Mustard Oil (1L)</h4>
@@ -182,7 +182,7 @@ export default function HomePage() {
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="bg-gray-50/50 dark:bg-white/[0.02] text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400 border-b border-gray-100 dark:border-white/10">
+                  <tr className="bg-gray-50/50 dark:bg-white/2 text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400 border-b border-gray-100 dark:border-white/10">
                     <th className="px-6 py-4">Date</th>
                     <th className="px-6 py-4">Supplier</th>
                     <th className="px-6 py-4">Items</th>
@@ -190,19 +190,19 @@ export default function HomePage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100 dark:divide-white/5 text-sm">
-                  <tr className="hover:bg-gray-50 dark:hover:bg-white/[0.02] cursor-default transition-colors">
+                  <tr className="hover:bg-gray-50 dark:hover:bg-white/2 cursor-default transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap text-gray-500 dark:text-gray-400">12 Mar</td>
                     <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">Sharmaji Traders</td>
                     <td className="px-6 py-4 text-gray-500 dark:text-gray-400">5 Items</td>
                     <td className="px-6 py-4 font-medium text-right text-gray-900 dark:text-white">₹6,200</td>
                   </tr>
-                  <tr className="hover:bg-gray-50 dark:hover:bg-white/[0.02] cursor-default transition-colors">
+                  <tr className="hover:bg-gray-50 dark:hover:bg-white/2 cursor-default transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap text-gray-500 dark:text-gray-400">10 Mar</td>
                     <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">Gupta Traders</td>
                     <td className="px-6 py-4 text-gray-500 dark:text-gray-400">3 Items</td>
                     <td className="px-6 py-4 font-medium text-right text-gray-900 dark:text-white">₹3,800</td>
                   </tr>
-                  <tr className="hover:bg-gray-50 dark:hover:bg-white/[0.02] cursor-default transition-colors">
+                  <tr className="hover:bg-gray-50 dark:hover:bg-white/2 cursor-default transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap text-gray-500 dark:text-gray-400">8 Mar</td>
                     <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">Ravi Traders</td>
                     <td className="px-6 py-4 text-gray-500 dark:text-gray-400">4 Items</td>
@@ -337,7 +337,7 @@ export default function HomePage() {
           <div className="bg-white dark:bg-[#1A1D24] border border-gray-100 dark:border-white/10 rounded-2xl p-6 shadow-xs">
             <div className="flex items-center justify-between mb-8">
               <h3 className="font-semibold text-gray-900 dark:text-white">Trend</h3>
-              <span className="text-xs font-medium px-2 py-1 bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-400 rounded-md">Q1 '26</span>
+              <span className="text-xs font-medium px-2 py-1 bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-400 rounded-md">Q1 &#39;26</span>
             </div>
 
             <div className="flex items-end justify-between h-28 gap-3 px-2">
