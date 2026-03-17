@@ -10,6 +10,11 @@ const tesseract: {
     recognize: (image: Buffer | string, config?: Record<string, unknown>) => Promise<string>;
 } = require("node-tesseract-ocr");
 
+const getTesseractCommand = (): string | undefined => {
+    const fromEnv = String(process.env.TESSERACT_BINARY_PATH || "").trim();
+    return fromEnv || undefined;
+};
+
 type DeliveryProductSnapshot = {
     _id: mongoose.Types.ObjectId;
     unit: string;
@@ -608,7 +613,9 @@ export const transformPhotoToDeliveryDraftController = async (req: Request, res:
 
         let rawOcrText = "";
         try {
+            const configuredCommand = getTesseractCommand();
             rawOcrText = await tesseract.recognize(imageBuffer, {
+                ...(configuredCommand ? { binary: configuredCommand } : {}),
                 lang: "eng",
                 oem: 1,
                 psm: 6,
@@ -616,7 +623,7 @@ export const transformPhotoToDeliveryDraftController = async (req: Request, res:
             });
         } catch (ocrError: any) {
             return res.status(500).json({
-                message: "OCR failed. Please verify Tesseract OCR is installed and accessible on the server.",
+                message: "OCR failed. Install Tesseract OCR and ensure it is in PATH or set TESSERACT_BINARY_PATH in backend/.env.",
                 error: ocrError?.message || "Unknown OCR error"
             });
         }
