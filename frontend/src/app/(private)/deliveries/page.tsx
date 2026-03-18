@@ -5,8 +5,50 @@ import {
   TrendingUp,
 } from "lucide-react";
 import ClientSide from "@/components/Delivery/ClientSide";
+import { headers } from "next/headers";
 
-export default function DeliveriesPage() {
+  const getDeliveryData = async() =>{
+    try{
+      const incomingHeaders = await headers();
+       const cookieHeader = incomingHeaders.get("cookie") || "";
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/userInterface/dataForDeliveryPage`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          cookie: cookieHeader,
+        },
+      });
+      const result = await response.json();
+      console.log("Delivery data response:", result);
+      if (!response.ok) {  
+        console.log("Failed to fetch delivery data. Status:", response.status);
+        throw new Error("Failed to fetch delivery data");
+      }
+
+      
+      return {
+        todayDelivery: Number(result?.data?.todayDeliveries || 0),
+        lastMonthDelivery: Number(result?.data?.lastMonthDelivery || 0),
+        last6MonthDeliveries: Number(result?.data?.last6MonthDeliveries || 0),
+      }
+
+    }
+    catch(e){
+      console.log("Error fetching delivery data:", e);    
+      // toast.error("Failed to fetch delivery data. Please try again later.");
+      return {
+        todayDelivery: 0,
+        lastMonthDelivery: 0,
+        last6MonthDeliveries: 0,
+      }
+    }
+  }
+
+
+export default async function DeliveriesPage() {
+
+  const {todayDelivery, lastMonthDelivery, last6MonthDeliveries} = await getDeliveryData();
+
   return (
     <div className="relative overflow-hidden p-6 md:p-8 space-y-8">
       <div className="pointer-events-none absolute -top-40 -right-24 h-80 w-80 rounded-full bg-cyan-200/30 blur-3xl dark:bg-cyan-500/10" />
@@ -29,7 +71,7 @@ export default function DeliveriesPage() {
             </p>
             <TrendingUp className="h-4 w-4 text-emerald-500" />
           </div>
-          <p className="mt-3 text-3xl font-bold text-slate-900 dark:text-slate-100">18</p>
+          <p className="mt-3 text-3xl font-bold text-slate-900 dark:text-slate-100">{todayDelivery}</p>
           <p className="mt-1 text-xs text-emerald-600 dark:text-emerald-400">+12% from yesterday</p>
         </article>
 
@@ -40,7 +82,7 @@ export default function DeliveriesPage() {
             </p>
             <ImagePlus className="h-4 w-4 text-amber-500" />
           </div>
-          <p className="mt-3 text-3xl font-bold text-slate-900 dark:text-slate-100">6</p>
+          <p className="mt-3 text-3xl font-bold text-slate-900 dark:text-slate-100">{lastMonthDelivery}</p>
           <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">Product Delivered last month</p>
         </article>
 
@@ -51,7 +93,7 @@ export default function DeliveriesPage() {
             </p>
             <Clock3 className="h-4 w-4 text-sky-500" />
           </div>
-          <p className="mt-3 text-3xl font-bold text-slate-900 dark:text-slate-100">48s</p>
+          <p className="mt-3 text-3xl font-bold text-slate-900 dark:text-slate-100">{last6MonthDeliveries}</p>
           <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">Product Delivery last 6 months</p>
         </article>
       </section>

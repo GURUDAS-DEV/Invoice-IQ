@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { dashboardDataController, reportController } from "../Controller/userInteface.Controller";
+import { dashboardDataController, dataForDeliveryPageController, reportController } from "../Controller/userInteface.Controller";
 import { authMiddleware } from "../middleware/authMiddleware";
 
 const userInterfaceRouter = Router();
@@ -9,5 +9,6 @@ userInterfaceRouter.use(authMiddleware);
 
 userInterfaceRouter.get("/dashboardData", dashboardDataController);
 userInterfaceRouter.get("/report", reportController);
+userInterfaceRouter.get("/dataForDeliveryPage", dataForDeliveryPageController)
 
 export default userInterfaceRouter;

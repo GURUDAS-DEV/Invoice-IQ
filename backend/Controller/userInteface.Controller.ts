@@ -359,3 +359,43 @@ export const reportController = async (req: Request, res: Response): Promise<Res
         return res.status(500).json({ error: "An error occurred while fetching report data." });
     }
 };
+
+export const dataForDeliveryPageController = async (req: Request, res: Response): Promise<Response> => {
+    try{
+
+        const userId = req?.userId;
+        if (!userId || !mongoose.Types.ObjectId.isValid(userId)) {
+            return res.status(401).json({ message: "User ID is missing or invalid. Please log in again." });
+        }
+
+        const userObjectId = new mongoose.Types.ObjectId(userId);
+        const now = new Date();
+        const startOfToday = new Date(now);
+        startOfToday.setHours(0, 0, 0, 0);
+
+        const startOfLastMonth = new Date(now);
+        startOfLastMonth.setMonth(startOfLastMonth.getMonth() - 1);
+
+        const startOfLastSixMonths = new Date(now);
+        startOfLastSixMonths.setMonth(startOfLastSixMonths.getMonth() - 6);
+
+        const [todayDeliveries, lastMonthDelivery, last6MonthDeliveries ] = await Promise.all([
+            ProductSellerModel.countDocuments({ userId: userObjectId, date: { $gte: startOfToday } }),
+            ProductSellerModel.countDocuments({ userId: userObjectId, date: { $gte: startOfLastMonth } }),
+            ProductSellerModel.countDocuments({ userId: userObjectId, date: { $gte: startOfLastSixMonths } }),
+        ]);
+
+        return res.status(200).json({
+            message: "Data for delivery page fetched successfully.",
+            data: {
+                todayDeliveries,
+                lastMonthDelivery,
+                last6MonthDeliveries
+            },
+        });
+    }
+    catch(e){
+        console.log(e)
+        return res.status(500).json({ error: "An error occurred while fetching data for delivery page." });
+    }
+}

@@ -215,7 +215,7 @@ export const getAnalyticsSummaryController = async (req: Request, res: Response)
 		const allowedFilters: FilterKey[] = ["last7Days", "lastMonth", "last6Months", "lastYear", "custom"];
 		const safeFilter = allowedFilters.includes(filter) ? filter : "last6Months";
 		const { start, end, filter: resolvedFilter } = resolveDateRange(safeFilter, from, to);
-
+		
 		const userObjectId = new mongoose.Types.ObjectId(userId);
 
 		const deliveries = await ProductSellerModel.find({
