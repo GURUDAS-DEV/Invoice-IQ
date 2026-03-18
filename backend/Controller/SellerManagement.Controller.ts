@@ -82,9 +82,129 @@ export const GetSellerController = async(req : Request, res : Response) : Promis
 
         const userObjectId = new mongoose.Types.ObjectId(userId);
 
-        const seller = await SellerModel.find({ userId : userObjectId });
-        
-        return res.status(200).json({message : "Seller fetched successfully", data : seller});
+        const now = new Date();
+        const startOfCurrentMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1));
+        const startOfLastMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 1, 1));
+
+        const [seller, deliveryStats] = await Promise.all([
+            SellerModel.find({ userId : userObjectId }).lean(),
+            ProductSellerModel.aggregate([
+                {
+                    $match : {
+                        userId : userObjectId,
+                        date : { $gte : startOfLastMonth, $lte : now }
+                    }
+                },
+                {
+                    $group : {
+                        _id : "$sellerId",
+                        deliveriesLastMonth : {
+                            $sum : {
+                                $cond : [
+                                    {
+                                        $and : [
+                                            { $gte : ["$date", startOfLastMonth] },
+                                            { $lt : ["$date", startOfCurrentMonth] }
+                                        ]
+                                    },
+                                    1,
+                                    0
+                                ]
+                            }
+                        },
+                        deliveriesCurrentMonth : {
+                            $sum : {
+                                $cond : [
+                                    {
+                                        $and : [
+                                            { $gte : ["$date", startOfCurrentMonth] },
+                                            { $lte : ["$date", now] }
+                                        ]
+                                    },
+                                    1,
+                                    0
+                                ]
+                            }
+                        },
+                        spendLastMonth : {
+                            $sum : {
+                                $cond : [
+                                    {
+                                        $and : [
+                                            { $gte : ["$date", startOfLastMonth] },
+                                            { $lt : ["$date", startOfCurrentMonth] }
+                                        ]
+                                    },
+                                    {
+                                        $convert : {
+                                            input : "$price",
+                                            to : "double",
+                                            onError : 0,
+                                            onNull : 0
+                                        }
+                                    },
+                                    0
+                                ]
+                            }
+                        },
+                        spendCurrentMonth : {
+                            $sum : {
+                                $cond : [
+                                    {
+                                        $and : [
+                                            { $gte : ["$date", startOfCurrentMonth] },
+                                            { $lte : ["$date", now] }
+                                        ]
+                                    },
+                                    {
+                                        $convert : {
+                                            input : "$price",
+                                            to : "double",
+                                            onError : 0,
+                                            onNull : 0
+                                        }
+                                    },
+                                    0
+                                ]
+                            }
+                        }
+                    }
+                }
+            ])
+        ]);
+
+        if(!seller || seller.length === 0){
+            return res.status(200).json({message : "No seller is being registered.", data : []});
+        }
+
+        const deliveryStatsBySellerId = new Map(
+            deliveryStats.map((stat) => [String(stat._id), {
+                deliveriesLastMonth : stat.deliveriesLastMonth ?? 0,
+                deliveriesCurrentMonth : stat.deliveriesCurrentMonth ?? 0,
+                spendLastMonth : stat.spendLastMonth ?? 0,
+                spendCurrentMonth : stat.spendCurrentMonth ?? 0
+            }])
+        );
+
+        const sellerWithMonthlyStats = seller.map((sellerDoc) => {
+            const stats = deliveryStatsBySellerId.get(String(sellerDoc._id));
+
+            return {
+                ...sellerDoc,
+                monthlyStats : {
+                    lastMonth : {
+                        deliveries : stats?.deliveriesLastMonth ?? 0,
+                        totalSpend : stats?.spendLastMonth ?? 0
+                    },
+                    currentMonth : {
+                        deliveries : stats?.deliveriesCurrentMonth ?? 0,
+                        totalSpend : stats?.spendCurrentMonth ?? 0
+                    }
+                }
+            };
+        });
+
+        return res.status(200).json({message : "Seller fetched successfully", data : sellerWithMonthlyStats});
     }
     catch(e : any){
         return res.status(500).json({message : "Internal Server Error", error : e?.message || "Unknown error"});

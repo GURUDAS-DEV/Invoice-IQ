@@ -19,6 +19,19 @@ import {
   Building2,
 } from "lucide-react";
 
+interface currentMonthStat {
+  deliveries: number;
+  totalSpend: number;
+}
+interface lastMonthStat {
+  deliveries: number;
+  totalSpend: number;
+}
+interface monthlyStat{
+  currentMonth : currentMonthStat;
+  lastMonth : lastMonthStat;
+}
+
 interface Seller {
   _id?: string;
   id?: string;
@@ -29,7 +42,7 @@ interface Seller {
   notes?: string;
   isFavorite?: boolean;
   lastDelivery?: string;
-  monthlySpend?: string;
+  monthlyStats?: monthlyStat;
   status?: "active" | "inactive";
 }
 
@@ -54,7 +67,7 @@ const mapSellerFromApi = (seller: Partial<Seller>): Seller => ({
   notes: seller.notes || "",
   isFavorite: Boolean(seller.isFavorite),
   lastDelivery: seller.lastDelivery,
-  monthlySpend: seller.monthlySpend,
+  monthlyStats: seller.monthlyStats,
   status: seller.status,
 });
 
@@ -276,7 +289,7 @@ export default function SellersPage() {
                 <div className="flex items-center gap-1 text-gray-400">
                   <Calendar className="w-3 h-3" />
                 </div>
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-200">{seller.lastDelivery || "—"}</span>
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-200">{seller.monthlyStats?.currentMonth.deliveries || "—"}</span>
               </div>
 
               {/* Monthly Spend */}
@@ -284,7 +297,7 @@ export default function SellersPage() {
                 <div className="flex items-center gap-1 text-gray-400">
                   <Wallet className="w-3 h-3" />
                 </div>
-                <span className="text-sm font-semibold text-gray-900 dark:text-white">{seller.monthlySpend || "₹0"}</span>
+                <span className="text-sm font-semibold text-gray-900 dark:text-white">{seller.monthlyStats?.currentMonth.totalSpend || "₹0"}</span>
               </div>
 
               {/* Arrow */}

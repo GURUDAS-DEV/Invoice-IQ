@@ -1,4 +1,5 @@
 
+import ActionButton from "@/components/Home/ActionButton"
 import {
   IndianRupee,
   Users,
@@ -163,16 +164,7 @@ export default async function HomePage() {
           <h1 className="text-2xl font-semibold text-gray-900 dark:text-white tracking-tight">Dashboard</h1>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Here&apos;s your business summary for {monthLabel}.</p>
         </div>
-        <div className="flex flex-wrap items-center gap-3">
-          <button className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-[#1A1D24] border border-gray-200 dark:border-white/10 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors shadow-xs">
-            <Plus className="w-4 h-4" />
-            Add Supplier
-          </button>
-          <button className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-[#1A1D24] border border-gray-200 dark:border-white/10 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors shadow-xs">
-            <Plus className="w-4 h-4" />
-            Add Delivery
-          </button>
-        </div>
+        <ActionButton />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
