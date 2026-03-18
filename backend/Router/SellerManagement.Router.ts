@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { CreateSellerController, GetSellerByIdController, GetSellerController } from "../Controller/SellerManagement.Controller";
+import { CreateSellerController, DeleteSellerController, GetSellerByIdController, GetSellerController } from "../Controller/SellerManagement.Controller";
 import { authMiddleware } from "../middleware/authMiddleware";
 
 const sellerManagementRouter = Router();
@@ -10,5 +10,6 @@ sellerManagementRouter.use(authMiddleware);
 sellerManagementRouter.post("/createSeller", CreateSellerController);
 sellerManagementRouter.get("/getSeller/:id", GetSellerByIdController);
 sellerManagementRouter.get("/getSeller", GetSellerController);
+sellerManagementRouter.delete("/deleteSeller/:id", DeleteSellerController);
 
 export default sellerManagementRouter;

@@ -17,6 +17,7 @@ import {
   Hash,
   FileText,
   Building2,
+  Trash2,
 } from "lucide-react";
 
 interface currentMonthStat {
@@ -84,6 +85,7 @@ export default function SellersPage() {
   const [formErrors, setFormErrors] = useState<{ name?: string; mobile?: string; address?: string }>({});
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
+  const [deletingSellerId, setDeletingSellerId] = useState<string | null>(null);
 
   // Fetch sellers from backend
   useEffect(() => {
@@ -190,6 +192,40 @@ export default function SellersPage() {
     }
   }
 
+  async function handleDeleteSeller(sellerId?: string) {
+    if (!sellerId) {
+      toast.error("Seller id is missing.");
+      return;
+    }
+
+    const shouldDelete = window.confirm("Delete this seller? This will also delete related products and deliveries.");
+    if (!shouldDelete) {
+      return;
+    }
+
+    try {
+      setDeletingSellerId(sellerId);
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:9000";
+      const response = await fetch(`${baseUrl}/api/sellerManagement/deleteSeller/${sellerId}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result?.message || "Failed to delete seller");
+      }
+
+      setSellers((prev) => prev.filter((seller) => (seller._id || seller.id) !== sellerId));
+      toast.success("Seller deleted successfully.");
+    } catch (error) {
+      console.error("Error deleting seller:", error);
+      toast.error(error instanceof Error ? error.message : "Failed to delete seller");
+    } finally {
+      setDeletingSellerId(null);
+    }
+  }
+
   return (
     <div className="p-6 md:p-8 max-w-400 mx-auto space-y-8">
 
@@ -238,25 +274,28 @@ export default function SellersPage() {
           </h3>
         </div>
       ) : filteredSellers.length > 0 ? (
-        <div className="bg-white dark:bg-[#1A1D24] border border-gray-100 dark:border-white/10 rounded-2xl shadow-xs overflow-hidden">
+        <div className="bg-white dark:bg-[#1A1D24] border border-gray-100 dark:border-white/10 rounded-2xl shadow-xs overflow-x-auto">
           {/* Table Header */}
-          <div className="hidden md:grid grid-cols-[1fr_160px_160px_32px] items-center px-6 py-3 border-b border-gray-100 dark:border-white/5">
-            <span className="text-[11px] font-semibold uppercase tracking-widest text-gray-400">Seller</span>
-            <span className="text-[11px] font-semibold uppercase tracking-widest text-gray-400 text-right">Last Delivery</span>
-            <span className="text-[11px] font-semibold uppercase tracking-widest text-gray-400 text-right">Monthly Spend</span>
-            <span />
+          <div className="flex min-w-190 items-center gap-6 px-6 py-3 border-b border-gray-100 dark:border-white/5">
+            <span className="flex-1 min-w-0 text-[11px] font-semibold uppercase tracking-widest text-gray-400">Seller</span>
+            <span className="w-32 shrink-0 text-[11px] font-semibold uppercase tracking-widest text-gray-400 text-right">Deliveries</span>
+            <span className="w-44 shrink-0 text-[11px] font-semibold uppercase tracking-widest text-gray-400 text-right">Monthly Spend</span>
+            <span className="w-16 shrink-0 text-[11px] font-semibold uppercase tracking-widest text-gray-400 text-right">Delete</span>
+            <span className="w-8 shrink-0" />
           </div>
 
           {filteredSellers.map((seller, index) => (
-            <Link
+            <div
               key={seller._id || seller.id}
-              href={`/home/seller/${seller._id || seller.id}`}
-              className={`group grid grid-cols-[1fr_auto] md:grid-cols-[1fr_160px_160px_32px] items-center gap-4 px-6 py-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-white/3 transition-all ${
+              className={`group min-w-190 flex items-center gap-6 px-6 py-4 hover:bg-gray-50 dark:hover:bg-white/3 transition-all ${
                 index !== 0 ? "border-t border-gray-100 dark:border-white/5" : ""
               }`}
             >
               {/* Seller Name + Address */}
-              <div className="flex items-center gap-3 min-w-0">
+              <Link
+                href={`/home/seller/${seller._id || seller.id}`}
+                className="flex flex-1 min-w-0 items-center gap-3 pr-2"
+              >
                 <div className="shrink-0 w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-500/10 flex items-center justify-center">
                   {seller.isFavorite
                     ? <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
@@ -268,7 +307,7 @@ export default function SellersPage() {
                       {seller.name}
                     </p>
                     {seller.nickname && (
-                      <span className="inline-flex max-w-[10rem] truncate rounded-full bg-gray-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-gray-600 dark:bg-white/10 dark:text-gray-300">
+                      <span className="inline-flex max-w-40 truncate rounded-full bg-gray-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-gray-600 dark:bg-white/10 dark:text-gray-300">
                         {seller.nickname}
                       </span>
                     )}
@@ -282,27 +321,50 @@ export default function SellersPage() {
                     <span className="text-xs text-gray-500 dark:text-gray-400 truncate">{getSellerLocation(seller.address)}</span>
                   </div>
                 </div>
-              </div>
+              </Link>
 
               {/* Last Delivery */}
-              <div className="hidden md:flex flex-col items-end gap-0.5">
+              <Link
+                href={`/home/seller/${seller._id || seller.id}`}
+                className="flex w-32 shrink-0 flex-col items-end gap-0.5"
+              >
                 <div className="flex items-center gap-1 text-gray-400">
                   <Calendar className="w-3 h-3" />
                 </div>
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-200">{seller.monthlyStats?.currentMonth.deliveries || "—"}</span>
-              </div>
+                <span className="text-sm font-medium tabular-nums text-gray-700 dark:text-gray-200">{seller.monthlyStats?.currentMonth.deliveries || "—"}</span>
+              </Link>
 
               {/* Monthly Spend */}
-              <div className="hidden md:flex flex-col items-end gap-0.5">
+              <Link
+                href={`/home/seller/${seller._id || seller.id}`}
+                className="flex w-44 shrink-0 flex-col items-end gap-0.5"
+              >
                 <div className="flex items-center gap-1 text-gray-400">
                   <Wallet className="w-3 h-3" />
                 </div>
-                <span className="text-sm font-semibold text-gray-900 dark:text-white">{seller.monthlyStats?.currentMonth.totalSpend || "₹0"}</span>
+                <span className="text-sm font-semibold tabular-nums text-gray-900 dark:text-white">₹{Number(seller.monthlyStats?.currentMonth.totalSpend || 0).toLocaleString("en-IN")}</span>
+              </Link>
+
+              <div className="flex w-16 shrink-0 justify-end">
+                <button
+                  type="button"
+                  disabled={deletingSellerId === (seller._id || seller.id)}
+                  onClick={() => handleDeleteSeller(seller._id || seller.id)}
+                  className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-red-200 text-red-500 hover:bg-red-50 disabled:opacity-50 disabled:cursor-not-allowed dark:border-red-500/30 dark:text-red-400 dark:hover:bg-red-500/10"
+                  title="Delete seller"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
               </div>
 
               {/* Arrow */}
-              <ChevronRight className="w-4 h-4 text-gray-300 dark:text-gray-600 group-hover:text-gray-500 dark:group-hover:text-gray-400 group-hover:translate-x-0.5 transition-all justify-self-end" />
-            </Link>
+              <Link
+                href={`/home/seller/${seller._id || seller.id}`}
+                className="flex w-8 shrink-0 justify-end"
+              >
+                <ChevronRight className="w-4 h-4 text-gray-300 dark:text-gray-600 group-hover:text-gray-500 dark:group-hover:text-gray-400 group-hover:translate-x-0.5 transition-all" />
+              </Link>
+            </div>
           ))}
         </div>
       ) : searchQuery && sellers.length > 0 ? (

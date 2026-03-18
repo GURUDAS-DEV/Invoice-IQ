@@ -299,3 +299,43 @@ export const GetSellerByIdController = async(req : Request, res : Response) : Pr
         return res.status(500).json({message : "Internal Server Error", error : e?.message || "Unknown error"});
     }
 }
+
+export const DeleteSellerController = async(req : Request, res : Response) : Promise<Response> => {
+    try {
+        const userId = req.userId;
+        const { id } = req.params;
+        const sellerId = Array.isArray(id) ? id[0] : id;
+
+        if(!userId){
+            return res.status(401).json({message : "User ID is missing. Please log in again."});
+        }
+
+        if(!mongoose.Types.ObjectId.isValid(userId)){
+            return res.status(400).json({message : "Authenticated userId is invalid."});
+        }
+
+        if(!sellerId || !mongoose.Types.ObjectId.isValid(sellerId)){
+            return res.status(400).json({message : "Seller id is invalid."});
+        }
+
+        const userObjectId = new mongoose.Types.ObjectId(userId);
+        const sellerObjectId = new mongoose.Types.ObjectId(sellerId);
+
+        const existingSeller = await SellerModel.findOne({ _id : sellerObjectId, userId : userObjectId }).select({ _id : 1 }).lean();
+
+        if(!existingSeller){
+            return res.status(404).json({message : "Seller not found."});
+        }
+
+        await Promise.all([
+            ProductSellerModel.deleteMany({ sellerId : sellerObjectId, userId : userObjectId }),
+            ProductModel.deleteMany({ sellerId : sellerObjectId, userId : userObjectId }),
+            SellerModel.deleteOne({ _id : sellerObjectId, userId : userObjectId })
+        ]);
+
+        return res.status(200).json({message : "Seller deleted successfully."});
+    }
+    catch(e : any){
+        return res.status(500).json({message : "Internal Server Error", error : e?.message || "Unknown error"});
+    }
+}

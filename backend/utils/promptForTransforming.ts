@@ -156,3 +156,8 @@ export const transformPromptToDeliveryItems = (prompt: string, fallbackDate: str
 		.map((line) => parsePromptLine(line, fallbackDate))
 		.filter((item): item is PromptTransformItem => Boolean(item));
 };
+
+
+export const promptForTransforming = `
+You are expert in extracting data from natural language text, user will give you a prompt that contains details about a delivery. Your task is to identify the product name, quantity, unit, price, and 
+`;
