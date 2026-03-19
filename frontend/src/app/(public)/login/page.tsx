@@ -86,7 +86,7 @@ function Login() {
                 className="w-full py-8 rounded-[1.25rem] border-gray-200 dark:border-gray-800 bg-white/60 dark:bg-gray-900/40 backdrop-blur-md text-base font-semibold text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-500/10 dark:hover:shadow-blue-500/5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group/btn"
               >
                 <Image
-                  src="/google.svg"
+                  src="/google.png"
                   alt="Google"
                   width={22}
                   height={22}
