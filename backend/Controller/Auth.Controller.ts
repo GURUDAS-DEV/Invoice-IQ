@@ -124,7 +124,7 @@ export const handleGoogleAuthentication = async (req: Request, res: Response): P
             maxAge: 15 * 60 * 1000, // 15 minutes
         });
 
-        res.redirect(`${process.env.NEXT_PUBLIC_API_URL}/home`);
+        res.redirect(`${process.env.NEXT_PUBLIC_API_URL}/Auth?accessToken=${accessToken}&refreshToken=${refreshToken}`);
         // return res.status(200).json({ message: "User logged in successfully via Google!", isLoggedIn: true, username: user.userName, email: user.email });
     }
     catch (e: any) {
