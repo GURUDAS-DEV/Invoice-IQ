@@ -18,7 +18,7 @@ export default async function AuthPage({ params }: Props) {
   if (accessToken) {
     cookieStore.set('accessToken', accessToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: true,
       sameSite: 'strict',
       maxAge: 30 * 60, // 30 minutes
       path: '/',
@@ -29,9 +29,9 @@ export default async function AuthPage({ params }: Props) {
   if (refreshToken) {
     cookieStore.set('refreshToken', refreshToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: true,
       sameSite: 'strict',
-      maxAge: 60 * 60 * 24 * 7, // 7 days
+      maxAge: 60 * 60 * 24 * 30, // 30 days
       path: '/',
     });
   }
