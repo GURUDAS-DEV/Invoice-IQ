@@ -6,6 +6,7 @@ import { hashString } from "../utils/Hash.helper";
 const clientId = process.env.GOOGLE_CLIENT_ID!;
 const redirectUri = process.env.GOOGLE_REDIRECT_URI!;
 const clientSecret = process.env.GOOGLE_CLIENT_SECRET!;
+const frontendAppUrl = process.env.FRONTEND_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -73,6 +74,10 @@ export const handleGoogleAuthentication = async (req: Request, res: Response): P
 
         const user = await UserModel.findOne({ email });
 
+        const encodedAccessToken = encodeURIComponent(accessToken);
+        const encodedRefreshToken = encodeURIComponent(refreshToken);
+        const authRedirectUrl = `${frontendAppUrl}/Auth/${encodedAccessToken}/${encodedRefreshToken}`;
+
         //if user is not in the databse then register them
         //this code start here for new user registration
         //when user doesn't exist
@@ -101,7 +106,7 @@ export const handleGoogleAuthentication = async (req: Request, res: Response): P
                 maxAge: 15 * 60 * 1000, // 15 minutes
             });
 
-            res.redirect(`${process.env.NEXT_PUBLIC_API_URL}/home`);
+            res.redirect(authRedirectUrl);
             // return res.status(200).json({ message: "User registered and logged in successfully via Google!", isLoggedIn: true, username: savedUser.userName, email: savedUser.email });
             return;
         }
@@ -124,7 +129,7 @@ export const handleGoogleAuthentication = async (req: Request, res: Response): P
             maxAge: 15 * 60 * 1000, // 15 minutes
         });
 
-        res.redirect(`${process.env.NEXT_PUBLIC_API_URL}/Auth?accessToken=${accessToken}&refreshToken=${refreshToken}`);
+        res.redirect(authRedirectUrl);
         // return res.status(200).json({ message: "User logged in successfully via Google!", isLoggedIn: true, username: user.userName, email: user.email });
     }
     catch (e: any) {

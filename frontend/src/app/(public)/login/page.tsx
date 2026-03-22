@@ -6,12 +6,9 @@ import Link from "next/link";
 import {  ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 function Login() {
-  const router = useRouter();
-
   const handleGoogleLogin = async () => {
     try {
       const response = await fetch(
@@ -24,7 +21,7 @@ function Login() {
       const data = await response.json();
 
       if (data?.url) {
-        router.push(data?.url);
+        window.location.assign(data.url);
       } else {
         toast.error("Failed to initiate Google login. Please try again later.");
       }
