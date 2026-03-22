@@ -74,10 +74,6 @@ export const handleGoogleAuthentication = async (req: Request, res: Response): P
 
         const user = await UserModel.findOne({ email });
 
-        const encodedAccessToken = encodeURIComponent(accessToken);
-        const encodedRefreshToken = encodeURIComponent(refreshToken);
-        const authRedirectUrl = `${frontendAppUrl}/Auth/${encodedAccessToken}/${encodedRefreshToken}`;
-
         //if user is not in the databse then register them
         //this code start here for new user registration
         //when user doesn't exist
@@ -106,6 +102,9 @@ export const handleGoogleAuthentication = async (req: Request, res: Response): P
                 maxAge: 15 * 60 * 1000, // 15 minutes
             });
 
+            const encodedAccessToken = encodeURIComponent(accessToken);
+            const encodedRefreshToken = encodeURIComponent(refreshToken);
+            const authRedirectUrl = `${frontendAppUrl}/Auth/${encodedAccessToken}/${encodedRefreshToken}`;
             res.redirect(authRedirectUrl);
             // return res.status(200).json({ message: "User registered and logged in successfully via Google!", isLoggedIn: true, username: savedUser.userName, email: savedUser.email });
             return;
@@ -129,6 +128,9 @@ export const handleGoogleAuthentication = async (req: Request, res: Response): P
             maxAge: 15 * 60 * 1000, // 15 minutes
         });
 
+        const encodedAccessToken = encodeURIComponent(accessToken);
+        const encodedRefreshToken = encodeURIComponent(refreshToken);
+        const authRedirectUrl = `${frontendAppUrl}/Auth/${encodedAccessToken}/${encodedRefreshToken}`;
         res.redirect(authRedirectUrl);
         // return res.status(200).json({ message: "User logged in successfully via Google!", isLoggedIn: true, username: user.userName, email: user.email });
     }
