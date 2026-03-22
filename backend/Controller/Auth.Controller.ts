@@ -6,7 +6,6 @@ import { hashString } from "../utils/Hash.helper";
 const clientId = process.env.GOOGLE_CLIENT_ID!;
 const redirectUri = process.env.GOOGLE_REDIRECT_URI!;
 const clientSecret = process.env.GOOGLE_CLIENT_SECRET!;
-const frontendAppUrl = process.env.FRONTEND_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
 
 const cookieOptions: CookieOptions = {
     httpOnly: true,
@@ -91,21 +90,16 @@ export const handleGoogleAuthentication = async (req: Request, res: Response): P
             newUser.refreshToken = hashedRefreshToken;
             await newUser.save();
 
-            res.cookie("refreshToken", refreshToken, {
-                ...cookieOptions,
-                maxAge: 40 * 24 * 60 * 60 * 1000, // 40 days,
-            });
             res.cookie("accessToken", accessToken, {
                 ...cookieOptions,
                 maxAge: 15 * 60 * 1000, // 15 minutes
             });
 
-            const encodedAccessToken = encodeURIComponent(accessToken);
-            const encodedRefreshToken = encodeURIComponent(refreshToken);
-            const authRedirectUrl = `${frontendAppUrl}/Auth/${encodedAccessToken}/${encodedRefreshToken}`;
-            res.redirect(authRedirectUrl);
-            // return res.status(200).json({ message: "User registered and logged in successfully via Google!", isLoggedIn: true, username: savedUser.userName, email: savedUser.email });
-            return;
+            res.cookie("refreshToken", refreshToken, {
+                ...cookieOptions,
+                maxAge: 40 * 24 * 60 * 60 * 1000, // 40 days,  
+            });
+            return res.redirect(`${process.env.NEXT_PUBLIC_API_URL}/home`);
         }
 
         //user is already at our database so just log them in
@@ -115,16 +109,6 @@ export const handleGoogleAuthentication = async (req: Request, res: Response): P
 
         user.refreshToken = hashedRefreshToken;
         await user.save();
-
-
-        res.cookie("refreshToken", refreshToken, {
-            ...cookieOptions,
-            maxAge: 40 * 24 * 60 * 60 * 1000, // 40 days,  
-        });
-        res.cookie("accessToken", accessToken, {
-            ...cookieOptions,
-            maxAge: 15 * 60 * 1000, // 15 minutes
-        });
 
         res.cookie("accessToken", accessToken, {
             ...cookieOptions,
