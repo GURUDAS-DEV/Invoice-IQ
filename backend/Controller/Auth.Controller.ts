@@ -10,8 +10,8 @@ const clientSecret = process.env.GOOGLE_CLIENT_SECRET!;
 const cookieOptions: CookieOptions = {
     httpOnly: true,
     secure: true,
-    sameSite: "lax",
-    domain: ".vercel.app",
+    sameSite: "none",
+    // domain: ".vercel.app",
     path: "/",
 };
 
