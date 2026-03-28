@@ -1,14 +1,14 @@
 # ===== Dependencies =====
-node_modules/
-.pnp
-.pnp.js
+# node_modules/
+# .pnp
+# .pnp.js
 
 # ===== Build outputs =====
-/frontend/.next/
-/frontend/out/
-/frontend/build/
-/backend/dist/
-/backend/build/
+# /frontend/.next/
+# /frontend/out/
+# /frontend/build/
+# /backend/dist/
+# /backend/build/
 
 # ===== Environment variables =====
 .env
@@ -32,8 +32,8 @@ Thumbs.db
 .idea/
 
 # ===== Next.js =====
-/frontend/.next/
-/frontend/next-env.d.ts
+# /frontend/.next/
+# /frontend/next-env.d.ts
 
 # ===== Misc =====
 *.pem
