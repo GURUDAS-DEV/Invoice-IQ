@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 22, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/Gursa/OneDrive/Desktop/CODING/Invoice%20IQ/frontend/src/app/%28private%29/deliveries/aiPrompt/page.tsx"],"sourcesContent":["const page = () => {\r\n  return (\r\n    <div>\r\n      \r\n    </div>\r\n  )\r\n}\r\n\r\nexport default page\r\n"],"names":[],"mappings":";;;;;;AAAA,MAAM,OAAO;IACX,qBACE,8OAAC;;;;;AAIL;uCAEe"}}]
+}

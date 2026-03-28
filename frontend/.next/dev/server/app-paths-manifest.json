@@ -1,0 +1,7 @@
+{
+  "/(private)/home/page": "app/(private)/home/page.js",
+  "/(private)/home/seller/page": "app/(private)/home/seller/page.js",
+  "/(public)/login/page": "app/(public)/login/page.js",
+  "/(public)/page": "app/(public)/page.js",
+  "/_not-found/page": "app/_not-found/page.js"
+}

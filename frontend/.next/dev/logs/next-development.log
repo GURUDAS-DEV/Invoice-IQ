@@ -1,0 +1,35 @@
+[00:00:02.731] Server  LOG     ✓ Ready in 2s
+[00:00:17.462] Browser WARN    Image with src "/LogoInDarkMode.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:00:47.289] Browser WARN    Image with src "/LogoInDarkMode.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:00:48.577] Server  LOG     Middleware executed. isAuthenticated: true
+[00:00:48.596] Server  LOG     Middleware executed. isAuthenticated: true
+[00:00:49.673] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/DarkLogo.png" "received" null
+[00:00:49.744] Server  ERROR   Error: The requested resource isn't a valid image.
+[00:00:50.760] Server  LOG     Middleware executed. isAuthenticated: true
+[00:00:51.024] Browser LOG     {"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input"}
+[00:00:51.024] Browser ERROR   Error fetching sellers: {"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input"}
+[00:00:51.024] Browser LOG     {"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input"}
+[00:00:51.024] Browser ERROR   Error fetching sellers: {"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input"}
+[00:01:16.949] Browser ERROR   Error saving seller: {"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input"}
+[00:01:29.325] Browser ERROR   Error saving seller: {"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input"}
+[00:01:47.656] Server  LOG     Middleware executed. isAuthenticated: false
+[00:01:47.837] Server  LOG     Middleware executed. isAuthenticated: false
+[00:01:49.559] Browser WARN    Image with src "/DarkLogo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:01:49.559] Browser WARN    Image with src "/Logo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:01:57.817] Server  LOG     Middleware executed. isAuthenticated: true
+[00:02:02.275] Server  LOG     Middleware executed. isAuthenticated: true
+[00:02:03.011] Browser LOG     {"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input"}
+[00:02:03.011] Browser ERROR   Error fetching sellers: {"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input"}
+[00:02:03.184] Browser LOG     {}
+[00:02:03.185] Browser ERROR   Error fetching sellers: {}
+[00:02:30.914] Browser ERROR   Error saving seller: {"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input"}
+[00:02:59.168] Browser ERROR   Error saving seller: {"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input"}
+[00:03:43.686] Browser ERROR   Error saving seller: {}
+[00:03:54.929] Browser ERROR   Error saving seller: {}
+[00:04:27.058] Browser ERROR   Error saving seller: {}
+[00:04:43.077] Browser ERROR   Error saving seller: {}
+[00:05:01.067] Browser ERROR   Error saving seller: {}
+[00:05:24.077] Browser ERROR   Error saving seller: {}
+[00:07:13.689] Server  LOG     Middleware executed. isAuthenticated: true
+[00:07:15.570] Browser LOG     {"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input"}
+[00:07:15.570] Browser ERROR   Error fetching sellers: {"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input"}
