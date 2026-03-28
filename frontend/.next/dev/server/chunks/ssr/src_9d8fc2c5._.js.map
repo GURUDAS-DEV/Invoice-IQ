@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 10, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/Gursa/OneDrive/Desktop/CODING/Invoice%20IQ/frontend/src/app/%28public%29/layout.tsx"],"sourcesContent":["import PublicNav from \"@/components/Navbar/PublicNav\";\r\n\r\nexport default function PublicLayout({\r\n  children,\r\n}: Readonly<{\r\n  children: React.ReactNode;\r\n}>) {\r\n  return (\r\n    <>\r\n    <PublicNav/>\r\n        {children}\r\n      </>\r\n  );\r\n}\r\n"],"names":[],"mappings":";;;;;AAAA;;;AAEe,SAAS,aAAa,EACnC,QAAQ,EAGR;IACA,qBACE;;0BACA,8OAAC,oJAAS;;;;;YACL;;;AAGT"}}]
-}

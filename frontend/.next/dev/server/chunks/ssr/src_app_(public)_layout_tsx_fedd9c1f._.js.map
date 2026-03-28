@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/Gursa/OneDrive/Desktop/CODING/Invoice%20IQ/frontend/src/app/%28public%29/layout.tsx"],"sourcesContent":["export default function PublicLayout({\r\n  children,\r\n}: Readonly<{\r\n  children: React.ReactNode;\r\n}>) {\r\n  return (\r\n    <>\r\n        {children}\r\n      </>\r\n  );\r\n}\r\n"],"names":[],"mappings":";;;;;;AAAe,SAAS,aAAa,EACnC,QAAQ,EAGR;IACA,qBACE;kBACK;;AAGT"}}]
-}
