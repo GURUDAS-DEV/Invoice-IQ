@@ -47,7 +47,7 @@ const PrivateTopBar = () => {
   const handleLogout = async () => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/auth/logout`,
+        `/api/auth/logout`,
         {
           method: "POST",
           credentials: "include", // Important to include cookies

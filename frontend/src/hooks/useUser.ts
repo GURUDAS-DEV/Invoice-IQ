@@ -15,7 +15,7 @@ export function useUser() {
   useEffect(() => {
     let cancelled = false;
 
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/me`, {
+    fetch(`/api/auth/me`, {
       method: "GET",
       credentials: "include",
     })

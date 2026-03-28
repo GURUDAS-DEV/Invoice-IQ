@@ -7,7 +7,7 @@ const getDeliveryData = async () => {
     const incomingHeaders = await headers();
     const cookieHeader = incomingHeaders.get("cookie") || "";
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/userInterface/dataForDeliveryPage`,
+      `/api/userInterface/dataForDeliveryPage`,
       {
         method: "GET",
         headers: {

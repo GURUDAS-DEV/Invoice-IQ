@@ -109,7 +109,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$di
 function Login() {
     const handleGoogleLogin = async ()=>{
         try {
-            const response = await fetch(`${("TURBOPACK compile-time value", "http://localhost:5162")}/api/auth/loginWithGoogle`, {
+            const response = await fetch(`/api/auth/loginWithGoogle`, {
                 method: "POST",
                 credentials: "include"
             });
