@@ -1,10 +1,4 @@
-[00:00:05.550] Server  LOG     MongoDB connected successfully🚀🚀
-[00:00:05.563] Server  LOG     Server is running on port 3000
-[00:00:10.519] Browser WARN    Image with src "/LogoInDarkMode.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:00:11.590] Server  LOG     Middleware executed. isAuthenticated: true
-[00:00:11.616] Server  LOG     Middleware executed. isAuthenticated: true
-[00:00:13.313] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/DarkLogo.png" "received" null
-[00:00:13.332] Server  ERROR   Error: The requested resource isn't a valid image.
-[00:00:15.131] Server  LOG     Middleware executed. isAuthenticated: true
-[00:00:15.687] Browser LOG     Fetch Sellers Response: {"data":[{"__v":0,"_id":"69b8eccdc787fb36070fe0ce","address":"Pippal mandi, agra","isFavorite":false,"mobile":"987654321","monthlyStats":{"currentMonth":{"deliveries":4,"totalSpend":13900},"lastMonth":{"deliveries":0,"totalSpend":0}},"name":"Sharma Ji Parchuni","nickname":"Bhai Sharma","userId":"69b54b0a8e96b36ba7045904"},{"__v":0,"_id":"69b8f1843516df4d2db1c6dc","address":"Faridabad","isFavorite":false,"mobile":"1234567890","monthlyStats":{"currentMonth":{"deliveries":2,"totalSpend":24000},"lastMonth":{"deliveries":0,"totalSpend":0}},"name":"Om trader","nickname":"Bhai sahab","userId":"69b54b0a8e96b36ba7045904"}],"message":"Seller fetched successfully"}
-[00:00:15.687] Browser LOG     Fetch Sellers Response: {"data":[{"__v":0,"_id":"69b8eccdc787fb36070fe0ce","address":"Pippal mandi, agra","isFavorite":false,"mobile":"987654321","monthlyStats":{"currentMonth":{"deliveries":4,"totalSpend":13900},"lastMonth":{"deliveries":0,"totalSpend":0}},"name":"Sharma Ji Parchuni","nickname":"Bhai Sharma","userId":"69b54b0a8e96b36ba7045904"},{"__v":0,"_id":"69b8f1843516df4d2db1c6dc","address":"Faridabad","isFavorite":false,"mobile":"1234567890","monthlyStats":{"currentMonth":{"deliveries":2,"totalSpend":24000},"lastMonth":{"deliveries":0,"totalSpend":0}},"name":"Om trader","nickname":"Bhai sahab","userId":"69b54b0a8e96b36ba7045904"}],"message":"Seller fetched successfully"}
+[00:00:07.741] Server  LOG     MongoDB connected successfully🚀🚀
+[00:00:07.747] Server  LOG     Server is running on port 3000 (NODE_ENV=development)
+[00:00:07.748] Server  LOG     Serving Next app from: C:\Users\Gursa\OneDrive\Desktop\CODING\Invoice IQ\frontend
+[00:00:07.748] Server  LOG     Next dev bundler: webpack

@@ -27,7 +27,7 @@ RUN cd /app/backend; npm ci --omit=dev
 COPY --from=backend-builder /app/backend/dist /app/backend/dist
 COPY --from=frontend-builder /app/frontend /app/frontend
 
-RUN mkdir -p /app/.next && chmod -R 777 /app
+RUN mkdir -p /app/frontend/.next && chmod -R 777 /app/frontend /app/backend
 
 EXPOSE 3000
 
