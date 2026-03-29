@@ -1,8 +1,9 @@
-[00:00:01.367] Server  LOG     Rewrites are being set up...
-[00:00:01.590] Server  LOG     ✓ Ready in 1194ms
-[00:00:01.760] Server  LOG     Middleware executed. isAuthenticated: false
-[00:00:05.031] Browser WARN    Image with src "/Logo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:00:05.233] Browser WARN    Image with src "/DarkLogo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:00:06.006] Server  ERROR   (node:18096) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[00:00:01.306] Server  LOG     Rewrites are being set up...
+[00:00:01.497] Server  LOG     ✓ Ready in 1052ms
+[00:00:01.652] Server  LOG     Middleware executed. isAuthenticated: false
+[00:00:04.190] Browser WARN    Image with src "/DarkLogo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:00:04.190] Browser WARN    Image with src "/Logo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:00:07.040] Server  ERROR   (node:3128) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
 (Use `node --trace-deprecation ...` to show where the warning was created)
-[00:00:08.098] Browser ERROR   Error initiating Google login: {}
+[00:00:07.875] Browser LOG     Google login response: {"message":"URL Generated Successfully","url":"https://accounts.google.com/o/oauth2/v2/auth?client_id=299587434456-il3p8oqk5r2b5kueoh3vcgq3bm6hg9ek.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Finvoice-iq-gamma.vercel.app%2Fapi%2Fauth%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&access_type=offline&prompt=consent"}
+[00:00:49.177] Browser WARN    Image with src "/LogoInDarkMode.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.

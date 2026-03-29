@@ -18,7 +18,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: "https://invoice-iq-gamma.vercel.app/:path*",
+        destination: "https://invoice-iq-gamma.vercel.app/api/:path*",
       },
     ];
   },

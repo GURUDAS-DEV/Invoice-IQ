@@ -19,6 +19,7 @@ function Login() {
         },
       );
       const data = await response.json();
+      console.log("Google login response:", data);
 
       if (data?.url) {
         window.location.assign(data.url);
@@ -26,7 +27,7 @@ function Login() {
         toast.error("Failed to initiate Google login. Please try again later.");
       }
     } catch (e) {
-      console.error("Error initiating Google login:", e);
+      console.log("Error initiating Google login:", e);
       toast.error(
         "An error occurred while initiating Google login. Please try again later.",
       );
