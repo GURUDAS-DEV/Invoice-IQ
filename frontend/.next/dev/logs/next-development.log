@@ -1,9 +1,10 @@
-[00:00:01.306] Server  LOG     Rewrites are being set up...
-[00:00:01.497] Server  LOG     ✓ Ready in 1052ms
-[00:00:01.652] Server  LOG     Middleware executed. isAuthenticated: false
-[00:00:04.190] Browser WARN    Image with src "/DarkLogo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:00:04.190] Browser WARN    Image with src "/Logo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:00:07.040] Server  ERROR   (node:3128) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
-(Use `node --trace-deprecation ...` to show where the warning was created)
-[00:00:07.875] Browser LOG     Google login response: {"message":"URL Generated Successfully","url":"https://accounts.google.com/o/oauth2/v2/auth?client_id=299587434456-il3p8oqk5r2b5kueoh3vcgq3bm6hg9ek.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Finvoice-iq-gamma.vercel.app%2Fapi%2Fauth%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&access_type=offline&prompt=consent"}
-[00:00:49.177] Browser WARN    Image with src "/LogoInDarkMode.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:00:05.550] Server  LOG     MongoDB connected successfully🚀🚀
+[00:00:05.563] Server  LOG     Server is running on port 3000
+[00:00:10.519] Browser WARN    Image with src "/LogoInDarkMode.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:00:11.590] Server  LOG     Middleware executed. isAuthenticated: true
+[00:00:11.616] Server  LOG     Middleware executed. isAuthenticated: true
+[00:00:13.313] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/DarkLogo.png" "received" null
+[00:00:13.332] Server  ERROR   Error: The requested resource isn't a valid image.
+[00:00:15.131] Server  LOG     Middleware executed. isAuthenticated: true
+[00:00:15.687] Browser LOG     Fetch Sellers Response: {"data":[{"__v":0,"_id":"69b8eccdc787fb36070fe0ce","address":"Pippal mandi, agra","isFavorite":false,"mobile":"987654321","monthlyStats":{"currentMonth":{"deliveries":4,"totalSpend":13900},"lastMonth":{"deliveries":0,"totalSpend":0}},"name":"Sharma Ji Parchuni","nickname":"Bhai Sharma","userId":"69b54b0a8e96b36ba7045904"},{"__v":0,"_id":"69b8f1843516df4d2db1c6dc","address":"Faridabad","isFavorite":false,"mobile":"1234567890","monthlyStats":{"currentMonth":{"deliveries":2,"totalSpend":24000},"lastMonth":{"deliveries":0,"totalSpend":0}},"name":"Om trader","nickname":"Bhai sahab","userId":"69b54b0a8e96b36ba7045904"}],"message":"Seller fetched successfully"}
+[00:00:15.687] Browser LOG     Fetch Sellers Response: {"data":[{"__v":0,"_id":"69b8eccdc787fb36070fe0ce","address":"Pippal mandi, agra","isFavorite":false,"mobile":"987654321","monthlyStats":{"currentMonth":{"deliveries":4,"totalSpend":13900},"lastMonth":{"deliveries":0,"totalSpend":0}},"name":"Sharma Ji Parchuni","nickname":"Bhai Sharma","userId":"69b54b0a8e96b36ba7045904"},{"__v":0,"_id":"69b8f1843516df4d2db1c6dc","address":"Faridabad","isFavorite":false,"mobile":"1234567890","monthlyStats":{"currentMonth":{"deliveries":2,"totalSpend":24000},"lastMonth":{"deliveries":0,"totalSpend":0}},"name":"Om trader","nickname":"Bhai sahab","userId":"69b54b0a8e96b36ba7045904"}],"message":"Seller fetched successfully"}

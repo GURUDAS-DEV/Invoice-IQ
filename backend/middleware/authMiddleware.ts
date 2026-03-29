@@ -21,9 +21,11 @@ declare global {
     }
 }
 
+const isProduction = process.env.NODE_ENV === "production";
+
 const cookieOptions = {
     httpOnly: true,
-    secure: false,
+    secure: isProduction,
     sameSite: "lax" as const,
     path: "/"
 };

@@ -8,19 +8,10 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react"],
   },
+  output: "standalone",
 
   turbopack: {
     root: __dirname,
-  },
-
-  async rewrites() {
-    console.log("Rewrites are being set up...");
-    return [
-      {
-        source: "/api/:path*",
-        destination: "https://invoice-iq-gamma.vercel.app/api/:path*",
-      },
-    ];
   },
 };
 
