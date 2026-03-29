@@ -395,7 +395,6 @@ export const dataForDeliveryPageController = async (req: Request, res: Response)
         });
     }
     catch(e){
-        console.log(e)
         return res.status(500).json({ error: "An error occurred while fetching data for delivery page." });
     }
 }

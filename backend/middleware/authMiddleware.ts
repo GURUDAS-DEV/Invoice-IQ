@@ -82,7 +82,6 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction):
             const decodedAccess = jwt.verify(accessTokenValue, accessTokenSecret);
 
             if (!isTokenPayload(decodedAccess, "access")) {
-                console.log("Invalid access token payload:", decodedAccess);
                 res.clearCookie("accessToken", cookieOptions);
                 res.clearCookie("refreshToken", cookieOptions);
                 return res.status(401).json({ message: "Invalid access token. Please log in again." });
@@ -102,7 +101,6 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction):
         const decodedRefresh = jwt.verify(refreshTokenValue, refreshTokenSecret);
 
         if (!isTokenPayload(decodedRefresh, "refresh")) {
-            console.log("Invalid refresh token payload:", decodedRefresh);
             res.clearCookie("accessToken", cookieOptions);
             res.clearCookie("refreshToken", cookieOptions);
             return res.status(401).json({ message: "Invalid refresh token. Please log in again." });
@@ -116,7 +114,6 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction):
         attachAuthenticatedUser(req, decodedRefresh);
         return next();
     } catch (error: any) {
-        console.log("Authentication middleware error:", error);
         if (error?.name === "TokenExpiredError" || error?.name === "JsonWebTokenError" || error?.name === "NotBeforeError") {
             res.clearCookie("accessToken", cookieOptions);
             res.clearCookie("refreshToken", cookieOptions);
