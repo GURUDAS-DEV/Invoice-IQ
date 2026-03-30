@@ -6,8 +6,9 @@ const getDeliveryData = async () => {
   try {
     const incomingHeaders = await headers();
     const cookieHeader = incomingHeaders.get("cookie") || "";
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:9000";
     const response = await fetch(
-      `/api/userInterface/dataForDeliveryPage`,
+      `${baseUrl}/api/userInterface/dataForDeliveryPage`,
       {
         method: "GET",
         headers: {

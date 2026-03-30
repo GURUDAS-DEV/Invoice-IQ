@@ -182,7 +182,7 @@ NEXT_PUBLIC_BACKEND_URL="http://localhost:9000/api" # Ensure this matches your b
     From the `backend/` directory:
 
     ```bash
-    npm start
+    npm run dev
     ```
 
     The backend server will start on `http://localhost:9000` (or the `PORT` you configured). You should see a message like `Server is running on port 9000`.
@@ -209,7 +209,7 @@ NEXT_PUBLIC_BACKEND_URL="http://localhost:9000/api" # Ensure this matches your b
 ### Setting up Development Environment
 
 *   Ensure all dependencies are installed for both `backend` and `frontend`.
-*   The `npm start` script for the backend uses `nodemon` and `ts-node` for automatic restarts on code changes.
+*   The `npm run dev` script for the backend uses `nodemon` and `ts-node` for automatic restarts on code changes.
 *   The `npm run dev` script for the frontend leverages Next.js's hot module reloading.
 
 ### Running Tests

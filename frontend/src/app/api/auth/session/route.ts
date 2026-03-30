@@ -1,18 +1,17 @@
 import { NextResponse } from 'next/server';
 
 interface SessionBody {
-  accessToken?: string;
   refreshToken?: string;
 }
 
 export async function POST(req: Request) {
   try {
     const body = (await req.json()) as SessionBody;
-    const { accessToken, refreshToken } = body;
+    const { refreshToken } = body;
 
-    if (!accessToken || !refreshToken) {
+    if (!refreshToken) {
       return NextResponse.json(
-        { message: 'Missing required tokens.' },
+        { message: 'Missing required refresh token.' },
         { status: 400 },
       );
     }
@@ -20,19 +19,11 @@ export async function POST(req: Request) {
     const isProduction = process.env.NODE_ENV === 'production';
     const response = NextResponse.json({ message: 'Session created successfully.' });
 
-    response.cookies.set('accessToken', accessToken, {
-      httpOnly: true,
-      secure: isProduction,
-      sameSite: isProduction ? 'none' : 'lax',
-      maxAge: 30 * 60,
-      path: '/',
-    });
-
     response.cookies.set('refreshToken', refreshToken, {
       httpOnly: true,
       secure: isProduction,
       sameSite: isProduction ? 'none' : 'lax',
-      maxAge: 60 * 60 * 24 * 30,
+      maxAge: 40 * 24 * 60 * 60,
       path: '/',
     });
 
