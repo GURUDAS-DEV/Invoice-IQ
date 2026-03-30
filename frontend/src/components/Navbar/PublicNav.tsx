@@ -110,7 +110,7 @@ const Navbar = () => {
       </nav>
 
       {/* Mobile Navbar */}
-      <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 font-outfit w-[95%] md:hidden">
+      <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-80 font-outfit w-[95%] md:hidden">
         <div className="bg-white/40 dark:bg-gray-950/30 backdrop-blur-md border border-gray-200 dark:border-gray-800 rounded-2xl shadow-lg px-4 py-3 flex items-center justify-between w-full">
           {/* Logo */}
           <div className="shrink-0 relative p-1">
@@ -128,7 +128,7 @@ const Navbar = () => {
                   className="dark:hidden shrink-0"
                 />
                 <Image
-                  src="/DarkLogo.png"
+                  src="/LogoInDarkMode.png"
                   alt="InvoiceIQ Logo"
                   height={90}
                   width={90}
@@ -172,7 +172,7 @@ const Navbar = () => {
 
       {/* Mobile Sliding Menu */}
       <div
-        className={`fixed top-0 right-0 h-full w-[75%] max-w-[300px] bg-white dark:bg-gray-950 shadow-2xl z-40 transform transition-transform duration-300 ease-in-out md:hidden ${
+        className={`fixed top-0 right-0 h-full w-[75%] max-w-75 bg-white dark:bg-gray-950 shadow-2xl z-70 transform transition-transform duration-300 ease-in-out md:hidden ${
           isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -224,7 +224,7 @@ const Navbar = () => {
       {/* Overlay */}
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-30 md:hidden"
+          className="fixed inset-0 bg-black/50 z-60 md:hidden"
           onClick={closeMobileMenu}
         ></div>
       )}

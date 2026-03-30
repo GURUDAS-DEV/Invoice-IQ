@@ -1,14 +1,3 @@
 {
-  "/(private)/analytics/page": "app/(private)/analytics/page.js",
-  "/(private)/deliveries/page": "app/(private)/deliveries/page.js",
-  "/(private)/home/page": "app/(private)/home/page.js",
-  "/(private)/home/seller/page": "app/(private)/home/seller/page.js",
-  "/(private)/reports/page": "app/(private)/reports/page.js",
-  "/(public)/login/page": "app/(public)/login/page.js",
-  "/(public)/page": "app/(public)/page.js",
-  "/_not-found/page": "app/_not-found/page.js",
-  "/api/auth/google/callback/route": "app/api/auth/google/callback/route.js",
-  "/api/auth/loginWithGoogle/route": "app/api/auth/loginWithGoogle/route.js",
-  "/api/auth/logout/route": "app/api/auth/logout/route.js",
-  "/api/auth/me/route": "app/api/auth/me/route.js"
+  "/(public)/page": "app/(public)/page.js"
 }
