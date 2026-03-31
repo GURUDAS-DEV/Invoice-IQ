@@ -18,6 +18,7 @@ import {
   FileText,
   Building2,
   Trash2,
+  AlertTriangle,
 } from "lucide-react";
 
 interface currentMonthStat {
@@ -97,6 +98,7 @@ export default function SellersPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [deletingSellerId, setDeletingSellerId] = useState<string | null>(null);
+  const [sellerToDelete, setSellerToDelete] = useState<Seller | null>(null);
 
   // Fetch sellers from backend
   useEffect(() => {
@@ -199,6 +201,7 @@ export default function SellersPage() {
 
       if (!response.ok) {
         const errorData = await response.json();
+        console.error("Error creating seller:", errorData);
         throw new Error(errorData.message || "Failed to create seller");
       }
 
@@ -216,16 +219,21 @@ export default function SellersPage() {
     }
   }
 
-  async function handleDeleteSeller(sellerId?: string) {
+  function openDeleteConfirmation(seller: Seller) {
+    setSellerToDelete(seller);
+  }
+
+  function closeDeleteConfirmation() {
+    if (!deletingSellerId) {
+      setSellerToDelete(null);
+    }
+  }
+
+  async function handleDeleteSeller() {
+    const sellerId = sellerToDelete?._id || sellerToDelete?.id;
+
     if (!sellerId) {
       toast.error("Seller id is missing.");
-      return;
-    }
-
-    const shouldDelete = window.confirm(
-      "Delete this seller? This will also delete related products and deliveries.",
-    );
-    if (!shouldDelete) {
       return;
     }
 
@@ -250,6 +258,7 @@ export default function SellersPage() {
         prev.filter((seller) => (seller._id || seller.id) !== sellerId),
       );
       toast.success("Seller deleted successfully.");
+      setSellerToDelete(null);
     } catch (error) {
       console.error("Error deleting seller:", error);
       toast.error(
@@ -405,7 +414,7 @@ export default function SellersPage() {
                 <button
                   type="button"
                   disabled={deletingSellerId === (seller._id || seller.id)}
-                  onClick={() => handleDeleteSeller(seller._id || seller.id)}
+                  onClick={() => openDeleteConfirmation(seller)}
                   className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-red-200 text-red-500 hover:bg-red-50 disabled:opacity-50 disabled:cursor-not-allowed dark:border-red-500/30 dark:text-red-400 dark:hover:bg-red-500/10"
                   title="Delete seller"
                 >
@@ -705,6 +714,61 @@ export default function SellersPage() {
               >
                 {isSaving ? "Saving..." : "Save Seller"}
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {sellerToDelete && (
+        <div className="fixed inset-0 z-60 flex items-center justify-center p-4">
+          <div
+            className="absolute inset-0 bg-black/40 dark:bg-black/65 backdrop-blur-sm"
+            onClick={closeDeleteConfirmation}
+          />
+
+          <div className="relative w-full max-w-md overflow-hidden rounded-2xl border border-red-100 bg-white shadow-2xl dark:border-red-500/25 dark:bg-[#171A20]">
+            <div className="h-1.5 w-full bg-linear-to-r from-rose-500 via-red-500 to-orange-500" />
+
+            <div className="px-6 py-5">
+              <div className="flex items-start gap-4">
+                <div className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-red-50 text-red-500 dark:bg-red-500/12 dark:text-red-400">
+                  <AlertTriangle className="h-5 w-5" />
+                </div>
+
+                <div className="min-w-0">
+                  <h3 className="text-base font-semibold text-gray-900 dark:text-white">
+                    Delete Seller
+                  </h3>
+                  <p className="mt-1 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+                    Are you sure you want to delete
+                    <span className="mx-1 font-semibold text-gray-900 dark:text-white">
+                      {sellerToDelete.name}
+                    </span>
+                    ? This will also remove related products and deliveries.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-5 flex items-center justify-end gap-3">
+                <button
+                  type="button"
+                  onClick={closeDeleteConfirmation}
+                  disabled={deletingSellerId === (sellerToDelete._id || sellerToDelete.id)}
+                  className="rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-white/10 dark:bg-transparent dark:text-gray-300 dark:hover:bg-white/5"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={handleDeleteSeller}
+                  disabled={deletingSellerId === (sellerToDelete._id || sellerToDelete.id)}
+                  className="inline-flex min-w-34 items-center justify-center rounded-xl bg-linear-to-r from-red-600 to-rose-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-all hover:from-red-700 hover:to-rose-700 disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {deletingSellerId === (sellerToDelete._id || sellerToDelete.id)
+                    ? "Deleting..."
+                    : "Yes, Delete"}
+                </button>
+              </div>
             </div>
           </div>
         </div>

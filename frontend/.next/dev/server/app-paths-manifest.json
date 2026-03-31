@@ -1,3 +1,11 @@
 {
-  "/(public)/page": "app/(public)/page.js"
+  "/(private)/analytics/page": "app/(private)/analytics/page.js",
+  "/(private)/deliveries/manual/page": "app/(private)/deliveries/manual/page.js",
+  "/(private)/deliveries/page": "app/(private)/deliveries/page.js",
+  "/(private)/home/page": "app/(private)/home/page.js",
+  "/(private)/home/seller/[id]/page": "app/(private)/home/seller/[id]/page.js",
+  "/(private)/home/seller/page": "app/(private)/home/seller/page.js",
+  "/(public)/page": "app/(public)/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/auth/me/route": "app/api/auth/me/route.js"
 }
