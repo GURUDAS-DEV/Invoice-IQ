@@ -8,8 +8,7 @@ export default function middleware(request: NextRequest): NextResponse {
   console.log(
     "Middleware executed. isAuthenticated:",
     Boolean(isAuthenticated),
-  );
-
+  )
   const { pathname } = request.nextUrl;
 
   if (pathname.startsWith("/login")) {
