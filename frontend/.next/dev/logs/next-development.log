@@ -1,34 +1,67 @@
-[00:00:02.966] Server  LOG     ✓ Ready in 2.2s
-[00:00:58.296] Browser WARN    Image with src "/LogoInDarkMode.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:01:15.299] Server  LOG     Middleware executed. isAuthenticated: true
-[00:01:15.321] Server  LOG     Middleware executed. isAuthenticated: true
-[00:01:17.596] Server  LOG     Middleware executed. isAuthenticated: true
-[00:01:17.773] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/DarkLogo.png" "received" null
-[00:01:17.857] Server  ERROR   Error: The requested resource isn't a valid image.
-[00:01:19.984] Browser LOG     Fetch Sellers Response: {"data":[{"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"}],"message":"Sellers fetched successfully"}
-[00:01:19.984] Browser LOG     Fetch Sellers Response: {"data":[{"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"}],"message":"Sellers fetched successfully"}
-[00:01:40.603] Server  LOG     Middleware executed. isAuthenticated: true
-[00:01:42.680] Browser LOG     Fetch Sellers Response: {"data":[{"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"}],"message":"Sellers fetched successfully"}
-[00:01:47.378] Server  LOG     Middleware executed. isAuthenticated: true
-[00:01:47.535] Server  LOG     Error fetching delivery data: TypeError: fetch failed
-[00:01:50.697] Server  LOG     Middleware executed. isAuthenticated: true
-[00:01:50.964] Browser LOG     Fetch Sellers Response: {"data":[{"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"}],"message":"Sellers fetched successfully"}
-[00:01:51.067] Browser LOG     Fetch Sellers Response: {"data":[{"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"}],"message":"Sellers fetched successfully"}
-[00:01:52.896] Server  LOG     Middleware executed. isAuthenticated: true
-[00:01:53.351] Server  LOG     Middleware executed. isAuthenticated: true
-[00:01:53.444] Server  LOG     Error fetching delivery data: TypeError: fetch failed
-[00:01:54.976] Server  LOG     Middleware executed. isAuthenticated: true
-[00:02:02.307] Server  LOG     Middleware executed. isAuthenticated: true
-[00:02:04.344] Server  LOG     Middleware executed. isAuthenticated: true
-[00:02:04.603] Browser LOG     Fetch Sellers Response: {"data":[{"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"}],"message":"Sellers fetched successfully"}
-[00:02:04.603] Browser LOG     Fetch Sellers Response: {"data":[{"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"}],"message":"Sellers fetched successfully"}
-[00:02:05.479] Server  LOG     Middleware executed. isAuthenticated: true
-[00:02:06.685] Server  LOG     Middleware executed. isAuthenticated: true
-[00:02:06.947] Browser ERROR   Error fetching seller: {}
-[00:02:06.947] Browser ERROR   Error fetching seller: {}
-[00:02:08.835] Browser LOG     Fetch Sellers Response: {"data":[{"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"}],"message":"Sellers fetched successfully"}
-[00:02:08.835] Browser LOG     Fetch Sellers Response: {"data":[{"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"}],"message":"Sellers fetched successfully"}
-[00:02:10.134] Server  LOG     Middleware executed. isAuthenticated: true
-[00:02:10.182] Server  LOG     Error fetching delivery data: TypeError: fetch failed
-[00:02:13.320] Server  LOG     Middleware executed. isAuthenticated: true
-[00:25:41.106] Server  LOG     Middleware executed. isAuthenticated: true
+[00:00:01.555] Server  LOG     ✓ Ready in 1127ms
+[00:00:20.841] Browser WARN    Image with src "/LogoInDarkMode.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:00:21.650] Server  LOG     Middleware executed. isAuthenticated: true
+[00:00:21.672] Server  LOG     Middleware executed. isAuthenticated: true
+[00:00:24.209] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/DarkLogo.png" "received" null
+[00:00:24.321] Server  ERROR   Error: The requested resource isn't a valid image.
+[00:00:24.727] Server  LOG     Middleware executed. isAuthenticated: true
+[00:00:25.074] Browser LOG     {"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input"}
+[00:00:25.074] Browser ERROR   Error fetching sellers: {"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input"}
+[00:00:25.074] Browser LOG     {"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input"}
+[00:00:25.074] Browser ERROR   Error fetching sellers: {"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input"}
+[00:00:26.209] Server  LOG     Middleware executed. isAuthenticated: false
+[00:00:26.229] Server  LOG     Middleware executed. isAuthenticated: false
+[00:00:26.878] Browser WARN    Image with src "/LogoInDarkMode.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:00:26.878] Browser WARN    Image with src "/Logo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:00:31.700] Browser LOG     Google login response: {"message":"URL Generated Successfully","url":"https://accounts.google.com/o/oauth2/v2/auth?client_id=299587434456-il3p8oqk5r2b5kueoh3vcgq3bm6hg9ek.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&access_type=offline&prompt=consent"}
+[00:00:39.513] Server  LOG     Middleware executed. isAuthenticated: true
+[00:00:45.517] Server  LOG     Middleware executed. isAuthenticated: true
+[00:00:48.266] Browser LOG     Fetch Sellers Response: {"data":[{"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"}],"message":"Sellers fetched successfully"}
+[00:00:48.434] Browser LOG     Fetch Sellers Response: {"data":[{"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"}],"message":"Sellers fetched successfully"}
+[00:01:04.129] Server  LOG     Middleware executed. isAuthenticated: true
+[00:01:04.316] Server  LOG     Error fetching delivery data: TypeError: fetch failed
+[00:01:07.771] Server  LOG     Middleware executed. isAuthenticated: true
+[00:01:26.736] Server  LOG     Middleware executed. isAuthenticated: true
+[00:02:41.426] Server  LOG     ✓ Compiled in 706ms
+[00:02:42.701] Server  LOG     Middleware executed. isAuthenticated: true
+[00:02:45.183] Browser LOG     Form data response: {"data":{"products":{"asyncState":null,"creationOptions":0,"exception":null,"id":8,"isCanceled":false,"isCompleted":true,"isCompletedSuccessfully":true,"isFaulted":false,"result":{"current":null},"status":5},"sellers":{"asyncState":null,"creationOptions":0,"exception":null,"id":7,"isCanceled":false,"isCompleted":true,"isCompletedSuccessfully":true,"isFaulted":false,"result":{"current":null},"status":5}},"message":"Manual delivery form data fetched successfully."}
+[00:03:36.996] Server  LOG     Middleware executed. isAuthenticated: true
+[00:03:40.884] Browser LOG     Form data response: {"data":{"products":{"asyncState":null,"creationOptions":0,"exception":null,"id":2,"isCanceled":false,"isCompleted":true,"isCompletedSuccessfully":true,"isFaulted":false,"result":{"current":null},"status":5},"sellers":{"asyncState":null,"creationOptions":0,"exception":null,"id":1,"isCanceled":false,"isCompleted":true,"isCompletedSuccessfully":true,"isFaulted":false,"result":{"current":null},"status":5}},"message":"Manual delivery form data fetched successfully."}
+[00:05:10.641] Server  LOG     Middleware executed. isAuthenticated: true
+[00:05:14.685] Browser LOG     Form data response: {"data":{"products":{"current":null},"sellers":{"current":null}},"message":"Manual delivery form data fetched successfully."}
+[00:05:57.230] Server  LOG     Middleware executed. isAuthenticated: true
+[00:06:00.879] Browser LOG     Form data response: {"data":{"products":{"current":null},"sellers":{"current":null}},"message":"Manual delivery form data fetched successfully."}
+[00:07:26.717] Server  LOG     Middleware executed. isAuthenticated: true
+[00:07:30.282] Browser LOG     Form data response: {"data":{"products":null,"sellers":null},"message":"Manual delivery form data fetched successfully."}
+[00:07:58.296] Server  LOG     Middleware executed. isAuthenticated: true
+[00:07:59.074] Browser WARN    Image with src "/DarkLogo.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:07:59.239] Browser LOG     Fetch Sellers Response: {"data":[{"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"}],"message":"Sellers fetched successfully"}
+[00:08:01.670] Server  LOG     Middleware executed. isAuthenticated: true
+[00:08:02.532] Browser ERROR   Error fetching seller: {}
+[00:08:02.532] Browser ERROR   Error fetching seller: {}
+[00:08:06.825] Server  LOG     Middleware executed. isAuthenticated: true
+[00:08:07.364] Browser WARN    Image with src "/DarkLogo.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:08:07.365] Browser ERROR   Error fetching seller: {}
+[00:08:08.444] Server  LOG     Middleware executed. isAuthenticated: true
+[00:08:08.710] Browser LOG     Fetch Sellers Response: {"data":[{"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"}],"message":"Sellers fetched successfully"}
+[00:08:08.817] Browser LOG     Fetch Sellers Response: {"data":[{"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"}],"message":"Sellers fetched successfully"}
+[00:08:38.988] Server  LOG     Middleware executed. isAuthenticated: true
+[00:08:39.056] Server  LOG     Error fetching delivery data: TypeError: fetch failed
+[00:08:40.467] Server  LOG     Middleware executed. isAuthenticated: true
+[00:08:43.886] Browser LOG     Form data response: {"data":{"products":null,"sellers":null},"message":"Manual delivery form data fetched successfully."}
+[00:21:26.438] Server  LOG     Middleware executed. isAuthenticated: true
+[00:21:29.680] Browser LOG     Form data response: {"data":{"products":{"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"},"sellers":{"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"}},"message":"Manual delivery form data fetched successfully."}
+[00:22:07.567] Server  LOG     ✓ Compiled in 101ms
+[00:22:09.382] Server  LOG     Middleware executed. isAuthenticated: true
+[00:22:11.771] Browser LOG     Form data response: {"products":{"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"},"sellers":{"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"}}
+[00:22:24.535] Server  LOG     ✓ Compiled in 81ms
+[00:22:26.171] Server  LOG     ✓ Compiled in 74ms
+[00:22:26.791] Server  LOG     Middleware executed. isAuthenticated: true
+[00:22:29.190] Browser LOG     Form data response: {"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"} {"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"}
+[00:26:09.069] Server  LOG     Middleware executed. isAuthenticated: true
+[00:26:10.991] Browser LOG     Form data response: [{"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"}] [{"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"}]
+[01:09:14.147] Server  LOG     Middleware executed. isAuthenticated: true
+[01:09:16.325] Browser LOG     Form data response: [{"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"}] [{"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"}]
+[01:09:16.325] Browser LOG     Form data response: [{"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"}] [{"_id":"69cabf610a027d69baef8fbb","address":"Radhasoami satsang, agra","isFavorite":true,"mobile":"1234567890","name":"Gurudas","nickName":"Guru Bhai","notes":"","userId":"69b54b0a8e96b36ba7045904"}]

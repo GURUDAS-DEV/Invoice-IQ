@@ -78,6 +78,7 @@ export default function ManualDeliveryPage() {
         );
 
         const result = await response.json();
+        console.log("Form data response:", result.data.sellers, result.data.products);
         if (!response.ok) {
           throw new Error(result?.message || "Failed to fetch form data.");
         }
